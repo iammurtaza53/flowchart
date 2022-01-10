@@ -93,35 +93,37 @@ export default {
     //     },
     //   ];
     //   data.forEach((field) => {
-    //     var that = this;
-    //     var flowID = String(field.flowid);
-    //     if (!this.flowcharts[flowID]) {
-    //       this.flowcharts[flowID] = {};
-    //       console.log(flowID);
-    //       this.flowcharts[flowID]["id"] = field["id"].toString();
-    //       console.log(this.flowcharts[flowID]);
-    //       this.flowcharts[flowID]["parentId"] = -1;
-    //       this.flowcharts[flowID]["nodeComponent"] = "demo-node";
-    //       this.flowcharts[flowID]["data"] = {};
-    //       this.flowcharts[flowID]["data"]["nodename"] = field["nodename"];
-    //       this.flowcharts[flowID]["data"]["relationship"] =
+    //     var parentNode = String(field.flowid);
+    //     if (!this.flowcharts[parentNode]) {
+    //       this.flowcharts[parentNode] = {};
+    //       this.flowcharts[parentNode]["id"] = field["id"].toString();
+    //       this.flowcharts[parentNode]["parentId"] = -1;
+    //       this.flowcharts[parentNode]["nodeComponent"] = "demo-node";
+    //       this.flowcharts[parentNode]["data"] = {};
+    //       this.flowcharts[parentNode]["data"]["nodename"] = field["nodename"];
+    //       this.flowcharts[parentNode]["data"]["relationship"] =
     //         field["relationship"];
-    //       // console.log(this.flowcharts[flowID]);
-    //       this.nodes.push(this.flowcharts[flowID]);
-    //       // console.log(this.nodes);
+    //       this.flowcharts[parentNode]["data"]["cardColor"] = "#f2f2f2";
+
+    //       this.nodes.push(this.flowcharts[parentNode]);
     //     } else {
-    //       this.flowcharts["subpart"] = {};
-    //       this.flowcharts["subpart"]["id"] = field["id"].toString();
-    //       this.flowcharts["subpart"]["parentId"] = (field["id"] - 1).toString();
-    //       this.flowcharts["subpart"]["nodeComponent"] = "demo-node";
-    //       this.flowcharts["subpart"]["data"] = {};
-    //       this.flowcharts["subpart"]["data"]["nodename"] = field["nodename"];
-    //       this.flowcharts["subpart"]["data"]["relationship"] =
+    //       this.flowcharts["childNode"] = {};
+    //       this.flowcharts["childNode"]["id"] = field["id"].toString();
+    //       this.flowcharts["childNode"]["parentId"] = (
+    //         field["id"] - 1
+    //       ).toString();
+    //       this.flowcharts["childNode"]["nodeComponent"] = "demo-node";
+    //       this.flowcharts["childNode"]["data"] = {};
+    //       this.flowcharts["childNode"]["data"]["nodename"] = field["nodename"];
+    //       this.flowcharts["childNode"]["data"]["relationship"] =
     //         field["relationship"];
-    //       this.nodes.push(this.flowcharts["subpart"]);
+    //       this.flowcharts["childNode"]["data"]["cardColor"] = "#f2f2f2";
+    //       this.nodes.push(this.flowcharts["childNode"]);
     //     }
     //   });
+   
     // },
+
     get_flow_data() {
       axios.get("http://localhost:8000/flows").then((res) => {
         var data = res.data;
@@ -164,6 +166,7 @@ export default {
   },
 
   created() {
+    // this.display();
     this.get_flow_data();
   },
 };
