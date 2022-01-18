@@ -10,8 +10,8 @@
     <div class="mt-4">
       <v-card>
         <v-card-title>
-          Nutrition
-          <!-- <v-spacer></v-spacer> -->
+          <!-- Nutrition
+          <v-spacer></v-spacer> -->
           <br />
           <v-text-field
             v-model="search"

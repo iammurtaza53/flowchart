@@ -6,11 +6,10 @@
     :to="item.to"
     :active-class="``"
   >
-   
-    <v-list-item-icon v-if="item.icon" class="sicon">
-      <feather :type="item.icon" ></feather>
+    <v-list-item-icon v-if="item.icon">
+      <v-icon>{{ item.icon }}</v-icon>
+      <!-- <feather :type="item.icon" ></feather> -->
     </v-list-item-icon>
-    
 
     <v-list-item-content v-if="item.title">
       <v-list-item-title v-text="item.title" />
@@ -19,34 +18,33 @@
 </template>
 
 <script>
-  import Themeable from 'vuetify/lib/mixins/themeable'
+import Themeable from "vuetify/lib/mixins/themeable";
 
-  export default {
-    name: 'BaseItem',
+export default {
+  name: "BaseItem",
 
-    mixins: [Themeable],
+  mixins: [Themeable],
 
-    props: {
-      item: {
-        type: Object,
-        default: () => ({
-          href: undefined,
-          icon: undefined,
-          title: undefined,
-          to: undefined,
-        }),
-      },
-      text: {
-        type: Boolean,
-        default: false,
-      },
+  props: {
+    item: {
+      type: Object,
+      default: () => ({
+        href: undefined,
+        icon: undefined,
+        title: undefined,
+        to: undefined,
+      }),
     },
-
-    computed: {
-        
-      href () {
-        return this.item.href || (!this.item.to ? '#' : undefined)
-      },
+    text: {
+      type: Boolean,
+      default: false,
     },
-  }
+  },
+
+  computed: {
+    href() {
+      return this.item.href || (!this.item.to ? "#" : undefined);
+    },
+  },
+};
 </script>

@@ -1,27 +1,32 @@
+
 export default [
   {
     header: "Flowchart",
-  },{
+  },
+  {
     title: "Charts",
-    icon: "disc",
+    icon: "mdi-chart-pie",
     to: "/charts/apexcharts",
   },
   {
     title: "Datatable",
-    icon: "hard-drive",
+    icon: "mdi-table",
     to: "/tables/tabledatatable",
   },
   {
     title: "History",
+    icon:"mdi-weather-cloudy-clock",
     to: "/user/history"
   },
   {
     title: "Assets",
+    icon:"mdi-file-table",
     to: "/user/assets"
     
   },
   {
-    title: "USERS",
+    title: "Users",
+    icon:"mdi-account",
     to: "/user/add-users"
     
   },
