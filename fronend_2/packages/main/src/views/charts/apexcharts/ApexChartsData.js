@@ -252,19 +252,21 @@ export default {
   barChart: {
     series: [
       {
-        data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380],
+        data: [1,2.5,2,3],
       },
     ],
-
+   
     chartOptions: {
+     
       chart: {
         width: "100%",
         height: 350,
       },
-      colors: themeColors,
+     colors: ['#0000FF','#00A300', '#FFBF00', '#f00'],
       plotOptions: {
         bar: {
           horizontal: false,
+          distributed: true ,
         },
       },
 
@@ -273,9 +275,10 @@ export default {
       },
       xaxis: {
         categories: [
-          'High',
+          'Informational',
+          'Low',
           'Medium',
-          'Low'
+          'High'
         ],
         labels: {
           style: {
@@ -290,6 +293,18 @@ export default {
           },
         },
       },
+      // fill: {
+      //   colors: [function ({ value}) {
+      //     if (value < 1000 && value >= 500 ) {
+      //       return '#FFBF00'
+      //     }
+      //     else if (value >= 400 && value <500)
+      //       return "#00A300"
+      //     else {
+      //       return '#f00'
+      //     }
+      //   }]
+    // },
       grid: {
         borderColor: "rgba(0,0,0,0.1)",
       },
@@ -925,9 +940,8 @@ export default {
     },
   },
   pieChart: {
-    series: [44, 55],
     chartOptions: {
-      labels: ["LINUX", "UNIX"],
+      labels: ["Windows", "UNIX"],
       colors: themeColors,
       responsive: [
         {

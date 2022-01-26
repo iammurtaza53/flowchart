@@ -1,3 +1,4 @@
+// import { configure } from "nprogress";
 
 export default [
   {
@@ -24,12 +25,24 @@ export default [
     to: "/user/assets"
     
   },
+{ group: '/user',
+  model: false,
+  icon:"mdi-account-cog",
+  title:'Settings',
+  
+  children: [
   {
-    title: "Users",
+    title: "User Management",
     icon:"mdi-account",
-    to: "/user/add-users"
-    
-  },
+    to:null,
+ },
+  {
+    title: "Add Users",
+    icon:"mdi-account-plus",
+    to: "add-users"
+      },
+    ]
+},
   // { header: "Personal" },
   // {
   //   group: "/dashboards",

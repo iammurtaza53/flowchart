@@ -51,6 +51,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+
 ]
 
 ROOT_URLCONF = "flowchart.urls"
@@ -89,7 +90,7 @@ DATABASES = {
         "PASSWORD": "",
         "HOST": "localhost",
         "PORT": "3306",
-        "OPTIONS": {"sql_mode": "traditional",},
+        "OPTIONS": {"sql_mode": "traditional", },
     }
 }
 
@@ -101,9 +102,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
 ]
 
 REST_FRAMEWORK = {
@@ -117,6 +118,15 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"

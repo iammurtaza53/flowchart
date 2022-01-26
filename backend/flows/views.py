@@ -38,21 +38,50 @@ def flowChart(request):
     # query_set.save()
 
     # return Response(True)
-class GetUserData(APIView):
+
+class RegisterUser(APIView):
     def post(self, request):
         userData = request.data
-        print(userData)
-        return Response({'response': 200})
+        registeredUser = RegisteredUsers.objects.filter(
+            email=userData['email'])
+        if not registeredUser:
+            registerUser = RegisteredUsers()
+            registerUser.user_firstname = userData['firstName']
+            registerUser.user_lastname = userData['lastName']
+            registerUser.email = userData['email']
+            registerUser.password = userData['password']
+            registerUser.save()
+
+            return Response({'status': 200, 'message': 'The User has been registered '})
+        return Response({'status': 500, 'message': 'User already exists.'})
 
 
-class GetFinalHostData(APIView):
+class LoginUser(APIView):
+    def post(self, request):
+        data = request.data
+        userEmail = data['email']
+        userPassword = data['password']
+        validUser = RegisteredUsers.objects.filter(
+            email=userEmail, password=userPassword)
+        if validUser:
+            return Response({'status': 200, 'message': "Login Sucessfull "})
+        else:
+            return Response({'status': 500, 'message': "User does not exists "})
+
+
+class GetFinalHostOSData(APIView):
     def get(self, request):
-        data = FinalHostsTbl.objects.all()
-        # data = serializers.serialize('json', data)
-        # data = json.dump(data)
-        serializer = FinalHostsSerializer(data)
-        data = JSONRenderer.render(serializer.data)
-        return Response({'status': 200, 'data': data})
+        data = FinalHostsTbl.objects.all().values('os')
+        serializer = FinalHostsSerializer(data, many=True)
+        return Response({'status': 200, 'data': serializer.data})
+
+
+class GetScanId(APIView):
+    def get(self, request):
+        scanIds = ScanIdTbl.objects.all()
+        scanIds = ScanIdTblSerializer(scanIds, many=True)
+        if scanIds:
+            return Response({'status': 200, 'scan-id': scanIds.data})
 
 
 class SnippetList(APIView):

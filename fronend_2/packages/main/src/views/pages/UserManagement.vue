@@ -82,12 +82,11 @@ export default {
         this.$refs.userData.validate();
       } else {
 
-        console.log("executed");
-        let url = "http://localhost:8000/add-user-data/";   
+        let url = "http://localhost:8000/register-user-data/";   
         axios.post(url, this.userData).then((res) => {
         
         if (res["status"] == 200) 
-        console.log("data has been send");
+        console.log(res['message']);
         
         });
         this.$refs.userData.resetValidation();

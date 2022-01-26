@@ -9,7 +9,18 @@ class FlowsSerializer(ModelSerializer):
         fields = "__all__"
 
 
-class FinalHostsSerializer(serializers.Serializer):
+class FinalHostsSerializer(ModelSerializer):
     class Meta:
         model = FinalHostsTbl
+        fields = ['os']
+
+
+class RegisteredUsersSerializer(ModelSerializer):
+    class Meta:
+        model = RegisteredUsers
         fields = "__all__"
+        
+class ScanIdTblSerializer(ModelSerializer):
+    class Meta:
+        model = ScanIdTbl
+        fields = ['scan_id']

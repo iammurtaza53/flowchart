@@ -11,7 +11,10 @@
       </v-col>
 
       <v-col cols="12" sm="12" lg="6">
-        <ApexPieCharts></ApexPieCharts>
+        <ApexPieCharts
+          :series="[osCount['windows'], osCount['unix']]"
+          :key="reRender"
+        ></ApexPieCharts>
       </v-col>
     </v-row>
   </v-container>
@@ -23,6 +26,7 @@ export default {
   name: "ApexCharts",
 
   data: () => ({
+    reRender: 0,
     page: {
       title: "ApexCharts",
     },
@@ -38,6 +42,11 @@ export default {
         disabled: true,
       },
     ],
+    os: null,
+    osCount: {
+      windows: 0,
+      unix: 0,
+    },
   }),
 
   created() {
@@ -47,16 +56,26 @@ export default {
   methods: {
     get_host_data() {
       axios.get("http://localhost:8000/get-final-host-data/").then((res) => {
-        console.log(res);
+        var data = res.data;
+
+        Object.values(data.data).forEach((res) => {
+          this.os = res.os.split(" ")[0];
+
+          if (this.os === "Windows") {
+            this.osCount["windows"] += 1;
+          } else this.osCount["unix"] += 1;
+        });
+        this.reRender++;
       });
     },
   },
   components: {
-    ApexBarCharts: () => import("./type-chart/ApexBarCharts"),
-    ApexPieCharts: () => import("./type-chart/ApexPieCharts"),
+    ApexBarCharts: () => import("@/views/charts/apexcharts/type-chart/ApexBarCharts.vue"),
+    ApexPieCharts: () => import("@/views/charts/apexcharts/type-chart/ApexPieCharts.vue"),
   },
 };
 </script>
 
 <style>
 </style>
+src\views\charts\apexcharts\type-chart\ApexBarCharts.vue

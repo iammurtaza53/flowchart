@@ -77,6 +77,9 @@ export default {
       setCustomizerDrawer: "SET_CUSTOMIZER_DRAWER",
     }),
   },
+  created() {
+    this.$router.push({ path: "/charts/apexcharts" });
+  },
 };
 </script>
 

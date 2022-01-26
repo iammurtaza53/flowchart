@@ -30,7 +30,7 @@
           loading-text="Loading... Please wait"
         >
           <template v-slot:item.calories="{ item }">
-            <v-chip :color="primary" dark>{{ item.calories }}</v-chip>
+            <v-chip dark>{{ item.calories }}</v-chip>
           </template></v-data-table
         >
       </v-card>
