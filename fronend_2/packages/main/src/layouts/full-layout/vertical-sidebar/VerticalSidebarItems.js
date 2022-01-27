@@ -7,7 +7,7 @@ export default [
   {
     title: "Charts",
     icon: "mdi-chart-pie",
-    to: "/charts/apexcharts",
+    to: "/analysis/charts",
   },
   {
     title: "Datatable",

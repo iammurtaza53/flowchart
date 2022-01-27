@@ -1,7 +1,10 @@
 <template>
   <v-container>
     <BaseCard heading="HISTORY">
-      <TableSimpleDense :userData="userData"></TableSimpleDense>
+      <TableSimpleDense
+        :userData="userData"
+        :tableHeaders="headers"
+      ></TableSimpleDense>
     </BaseCard>
   </v-container>
 </template>
@@ -14,6 +17,7 @@ export default {
   },
   data: () => ({
     userData: [],
+    headers: ["SCAN ID", "ACTION"],
   }),
   computed: {},
   methods: {

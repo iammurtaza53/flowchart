@@ -12,8 +12,11 @@
               <!-- <th class="text-left">User ID</th>
               <th class="text-left">Name</th>
               <th class="text-left">Email</th> -->
-              <th class="text-left">Scan ID</th>
-              <th class="text-left">Actions</th>
+              <!-- <th class="text-left">Scan ID</th>
+              <th class="text-left">Actions</th> -->
+              <th v-for="header in tableHeaders" :key="header" class="text-left">
+                {{ header }}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -52,8 +55,9 @@
 <script>
 export default {
   name: "TableSimpleDense",
-  props: ["userData"],
+  props: ["userData","tableHeaders"],
   data: () => ({
+    headers: ["SCAN ID", "ACTION"],
     // desserts: [
     //   {
     //     name: "Frozen Yogurt",

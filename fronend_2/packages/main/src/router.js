@@ -45,7 +45,7 @@ const router = new Router({
         {
           name: "User Managment",
           path: "/user/add-users",
-          component: () => import("@/views/pages/UserManagement")
+          component: () => import("@/views/pages/RegisterUser")
           
         },
         // Application
@@ -372,7 +372,7 @@ const router = new Router({
         // },
         {
           name: "ApexCharts",
-          path: "/charts/apexcharts",
+          path: "/analysis/charts",
           component: () => import("@/views/pages/ApexCharts"),
         },
         // {

@@ -28,7 +28,8 @@ export default {
   data: () => ({
     reRender: 0,
     page: {
-      title: "ApexCharts",
+      title: "Analytics",
+      icon: "mdi-home-analytics",
     },
     elementVisible: false,
     breadcrumbs: [
@@ -38,7 +39,7 @@ export default {
         to: "#",
       },
       {
-        text: "ApexCharts",
+        text: "Analytics",
         disabled: true,
       },
     ],
@@ -55,7 +56,7 @@ export default {
   },
   methods: {
     get_host_data() {
-      axios.get("http://localhost:8000/get-final-host-data/").then((res) => {
+      axios.get("http://localhost:8000/get-final-host-os-data/").then((res) => {
         var data = res.data;
 
         Object.values(data.data).forEach((res) => {
@@ -70,8 +71,10 @@ export default {
     },
   },
   components: {
-    ApexBarCharts: () => import("@/views/charts/apexcharts/type-chart/ApexBarCharts.vue"),
-    ApexPieCharts: () => import("@/views/charts/apexcharts/type-chart/ApexPieCharts.vue"),
+    ApexBarCharts: () =>
+      import("@/views/charts/apexcharts/type-chart/ApexBarCharts.vue"),
+    ApexPieCharts: () =>
+      import("@/views/charts/apexcharts/type-chart/ApexPieCharts.vue"),
   },
 };
 </script>

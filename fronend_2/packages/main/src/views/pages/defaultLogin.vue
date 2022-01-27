@@ -148,12 +148,26 @@ export default {
             this.userAuthentication
           )
           .then((res) => {
-            if (res.data["status"] === 200) { 
+            if (res.data["status"] === 200) {
+              var url = "http://localhost:8000/get-scanids/";
+              axios.get(url).then((res) => {
+                res.data["scan-id"].forEach((scanid) => {
+                  console.log(scanid[0]);
+                  this.$store.dispatch("set_scanid", scanid[0]);
+                });
+              });
               console.log(res.data["message"]);
               localStorage.setItem("user", this.userAuthentication.email);
-              this.$router.push({ path: "/charts/apexcharts" });
+              this.$router.push({ path: "/analysis/charts" });
             } else console.log(res.data["message"]);
           });
+
+        // var url = "http://localhost:8000/get-scanids/";
+        // axios.get(url).then((res) => {
+        //   res.data["scan-id"].forEach((scanid) => {
+        //     console.log(scanid);
+        //   });
+        // });
       }
     },
   },

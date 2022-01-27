@@ -74,6 +74,14 @@ export default {
         )
         .then((res) => {
           if (res.data["status"] === 200) {
+            var url = "http://localhost:8000/get-scanids/";
+            axios.get(url).then((res) => {
+              var that = this;
+              res.data["scan-id"].forEach((scanid) => {
+                this.userData.push(scanid);
+              });
+              consoel.log(this.userData);
+            });
             console.log(res.data["message"]);
             this.$router.push({ path: "dashboard" });
           } else console.log(res.data["message"]);

@@ -70,6 +70,15 @@ class LoginUser(APIView):
 
 
 class GetFinalHostOSData(APIView):
+    # def get(self, request):
+    #     scan_id = request.GET.get('scan_id', "")
+    #     data = FinalHostsTbl.objects.filter(scan_id).values('os')
+    #     if data:
+    #         serializer = FinalHostsSerializer(data, many=True)
+    #         return Response({'status': 200, 'data': serializer.data})
+    #     else:
+    #         return Response({'status': 500, })
+
     def get(self, request):
         data = FinalHostsTbl.objects.all().values('os')
         serializer = FinalHostsSerializer(data, many=True)
@@ -78,7 +87,7 @@ class GetFinalHostOSData(APIView):
 
 class GetScanId(APIView):
     def get(self, request):
-        scanIds = ScanIdTbl.objects.all()
+        scanIds = ScanIdTbl.objects.all().order_by('scan_id')
         scanIds = ScanIdTblSerializer(scanIds, many=True)
         if scanIds:
             return Response({'status': 200, 'scan-id': scanIds.data})
