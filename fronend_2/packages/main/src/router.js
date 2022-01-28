@@ -23,7 +23,7 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      component: () => import ('@/views/pages/defaultLogin')
+      component: () => import('@/views/pages/defaultLogin')
     },
     {
       path: "/dashboard",
@@ -34,25 +34,25 @@ const router = new Router({
           name: "UserHistory",
           path: "/user/history",
           component: () => import("@/views/pages/History")
-          
+
         },
         {
           name: "UserAssets",
           path: "/user/assets",
           component: () => import("@/views/pages/Assets")
-          
+
         },
         {
           name: "RegisterUser",
           path: "/user/add-users",
           component: () => import("@/views/pages/RegisterUser")
-          
+
         },
         {
           name: "UserManagment",
           path: "/user/get-all-users",
           component: () => import("@/views/pages/UserManagement")
-          
+
         },
         // Application
         // {
