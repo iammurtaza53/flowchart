@@ -7,7 +7,7 @@
     ></BaseBreadcrumb>
     <v-row v-show="elementVisible">
       <v-col cols="12" sm="12" lg="6">
-        <ApexBarCharts></ApexBarCharts>
+        <ApexBarCharts :key="reRender"></ApexBarCharts>
       </v-col>
 
       <v-col cols="12" sm="12" lg="6">
