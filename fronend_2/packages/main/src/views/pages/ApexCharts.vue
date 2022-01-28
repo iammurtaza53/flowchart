@@ -56,18 +56,20 @@ export default {
   },
   methods: {
     get_host_data() {
-      axios.get("http://localhost:8000/get-final-host-os-data/").then((res) => {
-        var data = res.data;
+      axios
+        .get("http://localhost:8000/get-final-host-os-data?scan_id=" + 0)
+        .then((res) => {
+          var data = res.data;
 
-        Object.values(data.data).forEach((res) => {
-          this.os = res.os.split(" ")[0];
+          Object.values(data.data).forEach((res) => {
+            this.os = res.os.split(" ")[0];
 
-          if (this.os === "Windows") {
-            this.osCount["windows"] += 1;
-          } else this.osCount["unix"] += 1;
+            if (this.os === "Windows") {
+              this.osCount["windows"] += 1;
+            } else this.osCount["unix"] += 1;
+          });
+          this.reRender++;
         });
-        this.reRender++;
-      });
     },
   },
   components: {
@@ -81,4 +83,4 @@ export default {
 
 <style>
 </style>
-src\views\charts\apexcharts\type-chart\ApexBarCharts.vue
+ 
