@@ -16,6 +16,7 @@
         :class="`${showLogo ? 'logo-width' : ''}`"
         v-if="navbarColor !== 'white'"
       >
+      welcome to the flowchart app 
         <span class="logo-icon">
           <img src="../../../assets/images/logo-light-icon.png" />
         </span>

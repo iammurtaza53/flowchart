@@ -1,0 +1,382 @@
+create table revalidation_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   vulnerability VARCHAR(100),
+   host VARCHAR(100),
+   result VARCHAR(100),
+   PRIMARY KEY ( id )
+);
+
+create table scan_id_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   PRIMARY KEY ( id )
+);
+
+
+create table issue5_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100),
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+
+
+create table issue2_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100),
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+create table issue1_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100),
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+
+create table findings_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   name VARCHAR(100),
+   risk VARCHAR(100),
+   count VARCHAR(100),
+   attackmitre VARCHAR(100),
+   sia VARCHAR(100),
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+create table final_hosts_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100),
+   hostname VARCHAR(100),
+   OS VARCHAR(100),
+   subnet VARCHAR(100),
+   compromised VARCHAR(100),
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+
+
+create table issue3_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100),
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+create table issue4_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100),
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+create table progress_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   description VARCHAR(100),
+   percentage  VARCHAR(100),  
+   PRIMARY KEY ( id )
+);
+
+
+create table paths_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   pathid INT NOT NULL,
+   host VARCHAR(100),
+   compromisedUser VARCHAR(100) NOT NULL,
+   method VARCHAR(100),        
+   user VARCHAR(100),
+   domain VARCHAR(100),
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+
+
+create table issue6_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+create table issue7_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   user VARCHAR(100) NOT NULL,
+   password VARCHAR(100),
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+
+create table domain_users_password_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   domain VARCHAR(100),
+   user VARCHAR(100) NOT NULL,
+   password VARCHAR(100),
+   host VARCHAR(100),        
+   method VARCHAR(100),
+   used VARCHAR(100),
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+create table domain_users_hash_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   domain VARCHAR(100),
+   user VARCHAR(100) NOT NULL,
+   hash VARCHAR(100),
+   host VARCHAR(100),        
+   method VARCHAR(100),
+   used VARCHAR(100),
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+
+create table smb_details_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   domain VARCHAR(100),
+   OS VARCHAR(100) NOT NULL,
+   host VARCHAR(100),        
+   hostname VARCHAR(100),
+   signing VARCHAR(100),
+   timpestamp DATE,
+   compromised VARCHAR(100),
+   subnet VARCHAR(100),
+   PRIMARY KEY ( id )
+);
+
+
+create table mssql_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
+
+create table service_445_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_1433_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_22_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_21_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_23_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_3306_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_1521_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_2049_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_5432_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_80_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_443_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_25_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_623_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_17988_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_137_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_8080_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_389_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_3250_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_3260_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_3389_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_5060_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_135_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_902_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_5800_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_5900_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_5222_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_27017_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table service_632_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   host VARCHAR(100) NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+create table subnets_tbl(
+   id INT NOT NULL AUTO_INCREMENT,
+   scan_id INT NOT NULL,
+   Subnet VARCHAR(100) NOT NULL,
+   Subnet_id INT NOT NULL,
+   timpestamp DATE,
+   PRIMARY KEY ( id )
+);
+
