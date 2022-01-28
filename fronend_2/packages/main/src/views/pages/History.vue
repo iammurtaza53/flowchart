@@ -1,12 +1,13 @@
 <template>
   <v-container>
     <BaseCard heading="HISTORY">
-      <v-btn color="primary" @click="scan()"> SCAN IDs</v-btn>
+      <v-btn color="primary" @click="scan()"> New Scan</v-btn>
       <TableSimpleDense
         :userData="userData"
         :tableHeaders="headers"
       ></TableSimpleDense>
     </BaseCard>
+  
   </v-container>
 </template>
 <script>
@@ -30,13 +31,11 @@ export default {
         });
       });
     },
+
     scan() {
       var url = "http://localhost:8000/scan/";
       axios.get(url).then((res) => {
         console.log(res.data["message"]);
-        //   res.data["scan"].forEach((messgae) => {
-        // console.log(messgae)
-        //   });
       });
     },
   },

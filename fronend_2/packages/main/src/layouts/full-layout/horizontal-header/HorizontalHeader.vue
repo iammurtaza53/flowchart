@@ -16,7 +16,6 @@
         :class="`${showLogo ? 'logo-width' : ''}`"
         v-if="navbarColor !== 'white'"
       >
-      welcome to the flowchart app 
         <span class="logo-icon">
           <img src="../../../assets/images/logo-light-icon.png" />
         </span>
@@ -123,7 +122,13 @@
                 <div>
                   <h4 class="font-weight-medium">{{ item.title }}</h4>
                   <span
-                    class="text--secondary caption descpart d-block text-truncate"
+                    class="
+                      text--secondary
+                      caption
+                      descpart
+                      d-block
+                      text-truncate
+                    "
                     >{{ item.desc }}</span
                   >
                   <small class="text--secondary">{{ item.time }}</small>
@@ -183,7 +188,13 @@
                 <div>
                   <h4 class="font-weight-medium">{{ item.title }}</h4>
                   <span
-                    class="text--secondary caption descpart d-block text-truncate"
+                    class="
+                      text--secondary
+                      caption
+                      descpart
+                      d-block
+                      text-truncate
+                    "
                     >{{ item.desc }}</span
                   >
                   <small class="text--secondary">{{ item.time }}</small>
@@ -208,7 +219,10 @@
         <template v-slot:activator="{ on }">
           <v-btn dark icon v-on="on" class="mr-1">
             <v-avatar size="40">
-              <img src="https://randomuser.me/api/portraits/men/81.jpg" alt="John" />
+              <img
+                src="https://randomuser.me/api/portraits/men/81.jpg"
+                alt="John"
+              />
             </v-avatar>
           </v-btn>
         </template>

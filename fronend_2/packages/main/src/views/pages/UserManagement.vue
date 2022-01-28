@@ -1,7 +1,11 @@
 <template>
   <v-container>
     <BaseCard heading="USER MANAGEMENT">
-      <UserTable :userData="userData" :tableHeaders="headers"></UserTable>
+      <UserTable
+        :userData="userData"
+        :tableHeaders="headers"
+        :loading="loading"
+      ></UserTable>
     </BaseCard>
   </v-container>
 </template>
@@ -9,23 +13,28 @@
 import axios from "axios";
 export default {
   components: {
-    UserTable: () => import("@/views/UserManagementComponents/UserTable.vue"),
+    UserTable: () => import("@/views/UserManagementComponents/Userstable.vue"),
   },
   data: () => ({
     userData: [],
-    headers: ["FIRST NAME", "LAST NAME", "EMAIL"],
+    headers: [
+      { text: "FIRST NAME", value: "user_firstname" },
+      { text: "LAST NAME", value: "user_lastname" },
+      { text: "EMAIL", value: "email" },
+    ],
+    loading: true,
   }),
   computed: {},
   methods: {
+
     get_all_users() {
       var url = "http://localhost:8000/get-all-registered-users/";
       axios.get(url).then((res) => {
-        // var that = this;
         var data = res.data.data;
-        // console.log(data);
         data.forEach((user) => {
           this.userData.push(user);
         });
+        this.loading = false;
       });
     },
   },

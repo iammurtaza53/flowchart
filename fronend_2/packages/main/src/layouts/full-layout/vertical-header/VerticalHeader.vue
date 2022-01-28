@@ -7,23 +7,23 @@
     :dark="navbarColor !== 'white'"
   >
     <!---Logo part -->
-    <v-toolbar-title
+    <!-- <v-toolbar-title
       class="align-center d-flex logo-width"
       :class="`${showLogo ? 'logo-width' : ''}`"
       v-if="navbarColor !== 'white'"
     >
+      
       <span class="logo-icon">
         <img src="../../../assets/images/logo-light-icon.png" class="mt-2" />
       </span>
       <span class="logo-text ml-2" :class="`${showLogo ? '' : 'hidelogo'}`">
         <img src="../../../assets/images/logo-light-text.png" class="mt-2" />
       </span>
-    </v-toolbar-title>
+    </v-toolbar-title> -->
     <!---Dark Logo part -->
     <v-toolbar-title
       class="align-center d-flex logo-width"
       :class="`${showLogo ? 'logo-width' : ''}`"
-      v-else
     >
       <span class="logo-icon">
         <img src="../../../assets/images/logo-icon.png" class="mt-2" />
@@ -59,6 +59,10 @@
         ></v-text-field>
       </template>
     </v-card>
+    <v-spacer />
+    <span class="justify display-2" v-if="$store.state.displayMessage">{{
+      $store.state.displayMessage
+    }}</span>
     <!---/Search part -->
     <v-spacer />
     <!---right part -->

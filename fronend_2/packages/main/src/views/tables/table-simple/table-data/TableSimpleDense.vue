@@ -14,7 +14,11 @@
               <th class="text-left">Email</th> -->
               <!-- <th class="text-left">Scan ID</th>
               <th class="text-left">Actions</th> -->
-              <th v-for="header in tableHeaders" :key="header" class="text-left">
+              <th
+                v-for="header in tableHeaders"
+                :key="header"
+                class="text-left"
+              >
                 {{ header }}
               </th>
             </tr>
@@ -40,7 +44,10 @@
                     white--text
                   "
                   height="5vh"
-                  @click="store_scanid(item.scan_id)"
+                  @click="
+                    store_scanid(item.scan_id);
+                    show != show;
+                  "
                   >SCAN</v-btn
                 >
               </td>
@@ -49,14 +56,16 @@
         </template>
       </v-simple-table>
     </div>
+    <v-tooltip dark top v-model="show">helloworld</v-tooltip>
   </div>
 </template>
 
 <script>
 export default {
   name: "TableSimpleDense",
-  props: ["userData","tableHeaders"],
+  props: ["userData", "tableHeaders"],
   data: () => ({
+    show: false,
     headers: ["SCAN ID", "ACTION"],
     // desserts: [
     //   {
@@ -105,6 +114,7 @@ export default {
     store_scanid(scan_id) {
       console.log("action has been dispatched");
       this.$store.dispatch("set_scanid", scan_id);
+      this.$store.dispatch("display_message");
     },
   },
 };

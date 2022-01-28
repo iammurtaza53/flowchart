@@ -17,7 +17,7 @@ export default new Vuetify({
       dark: theme,
       light: theme,
     },
-    dark: false, // If you want to set dark theme then dark:true else set to false
+    dark: true, // If you want to set dark theme then dark:true else set to false
   },
   rtl: false, // If you want to set rtl theme then rtl:true else set to false
 });

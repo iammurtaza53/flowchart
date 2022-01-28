@@ -1,6 +1,6 @@
 module.exports = {
   transpileDependencies: ["vuetify"],
-  publicPath: "/demos/vuejs-admin-templates/adminpro-vuetify-admin/dark/",
+  publicPath: "/",
   chainWebpack: (config) => {
     config.plugins.delete("prefetch");
   },
