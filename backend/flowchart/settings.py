@@ -26,12 +26,13 @@ SECRET_KEY = "51+fn!t1r$p9aqf(^)y14mai4=%*u%i7v1q-p^h@zisu^jvio9"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -40,7 +41,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "flows",
     "rest_framework",
-    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -127,6 +127,7 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
+
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
