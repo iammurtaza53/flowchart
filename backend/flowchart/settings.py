@@ -45,12 +45,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
 
 ]
 
@@ -84,13 +84,19 @@ DATABASES = {
     #     "NAME": BASE_DIR / "db.sqlite3",
     # }
     "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "project123",
-        "USER": "root",
-        "PASSWORD": "",
-        "HOST": "localhost",
-        "PORT": "3306",
-        "OPTIONS": {"sql_mode": "traditional", },
+        # "ENGINE": "django.db.backends.mysql",
+        # "NAME": "project123",
+        # "USER": "root",
+        # "PASSWORD": "",
+        # "HOST": "localhost",
+        # "PORT": "3306",
+        # "OPTIONS": {"sql_mode": "traditional", },
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "d3il9istve5iba",
+        "USER": "acsdeorgfmjeap",
+        "PASSWORD": "59acf03ca46305a502c2d502f420145ee3c8669d45546e34f10fc48522d4f302",
+        "HOST": "ec2-54-224-64-114.compute-1.amazonaws.com",
+        "PORT": "5432",
     }
 }
 
@@ -127,6 +133,18 @@ CORS_ALLOW_METHODS = [
     "POST",
     "PUT",
 ]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "UTC"

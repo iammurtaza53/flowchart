@@ -9,7 +9,8 @@ urlpatterns = [
     path("flows", FlowsSerializerViewSet.as_view(
         {"get": "list"}), name="flows"),
     path("register-user-data/", RegisterUser.as_view(), name="flows"),
-    path("get-final-host-os-data/", GetFinalHostOSData.as_view(), name="flows"),
+    re_path(r'^get-final-host-os-data/$', GetFinalHostOSData.as_view(),
+            name="GetFinalHostOSData"),
     path('authenticate-user/', LoginUser.as_view(),
          name="authenticate_user"),
     path('get-scanids/', GetScanId.as_view(), name='get_scanids'),
