@@ -34,7 +34,7 @@ export default [
   {
     title: "User Management",
     icon:"mdi-account",
-    to:null,
+    to:"get-all-users",
  },
   {
     title: "Add Users",

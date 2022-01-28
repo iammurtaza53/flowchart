@@ -14,6 +14,8 @@ urlpatterns = [
     path('authenticate-user/', LoginUser.as_view(),
          name="authenticate_user"),
     path('get-scanids/', GetScanId.as_view(), name='get_scanids'),
+    path('get-all-registered-users/', GetAllUsers.as_view(), name="GetAllUsers"),
+    path('scan/', Scan.as_view(), name="Scan"),
 
 
 ]

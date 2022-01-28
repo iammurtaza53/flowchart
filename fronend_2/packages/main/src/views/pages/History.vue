@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <BaseCard heading="HISTORY">
+      <v-btn color="primary" @click="scan()"> SCAN IDs</v-btn>
       <TableSimpleDense
         :userData="userData"
         :tableHeaders="headers"
@@ -27,6 +28,15 @@ export default {
         res.data["scan-id"].forEach((scanid) => {
           this.userData.push(scanid);
         });
+      });
+    },
+    scan() {
+      var url = "http://localhost:8000/scan/";
+      axios.get(url).then((res) => {
+        console.log(res.data["message"]);
+        //   res.data["scan"].forEach((messgae) => {
+        // console.log(messgae)
+        //   });
       });
     },
   },

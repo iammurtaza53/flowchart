@@ -72,12 +72,13 @@ class LoginUser(APIView):
 class GetFinalHostOSData(APIView):
     def get(self, request):
         scan_id = request.GET.get('scan_id')
-        data = FinalHostsTbl.objects.filter(scan_id = scan_id).values('os')
+        data = FinalHostsTbl.objects.filter(scan_id=scan_id).values('os')
         if data:
             serializer = FinalHostsSerializer(data, many=True)
             return Response({'status': 200, 'data': serializer.data})
         else:
             return Response({'status': 500})
+
 
 class GetScanId(APIView):
     def get(self, request):
@@ -86,6 +87,16 @@ class GetScanId(APIView):
         if scanIds:
             return Response({'status': 200, 'scan-id': scanIds.data})
 
+
+class GetAllUsers(APIView):
+    def get(self, request):
+        allUsers = RegisteredUsers.objects.all()
+        serialize = RegisteredUsersSerializer(allUsers, many=True)
+        return Response({'status': 200, 'data': serialize.data})
+
+class Scan(APIView):
+    def get(self,request):
+        return Response({'status':200,'message':'Scan API has been called'})
 class SnippetList(APIView):
     """
     List all snippets, or create a new snippet.

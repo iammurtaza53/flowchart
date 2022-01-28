@@ -43,9 +43,15 @@ const router = new Router({
           
         },
         {
-          name: "User Managment",
+          name: "RegisterUser",
           path: "/user/add-users",
           component: () => import("@/views/pages/RegisterUser")
+          
+        },
+        {
+          name: "UserManagment",
+          path: "/user/get-all-users",
+          component: () => import("@/views/pages/UserManagement")
           
         },
         // Application

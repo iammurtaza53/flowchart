@@ -84,13 +84,6 @@ DATABASES = {
     #     "NAME": BASE_DIR / "db.sqlite3",
     # }
     "default": {
-        # "ENGINE": "django.db.backends.mysql",
-        # "NAME": "project123",
-        # "USER": "root",
-        # "PASSWORD": "",
-        # "HOST": "localhost",
-        # "PORT": "3306",
-        # "OPTIONS": {"sql_mode": "traditional", },
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "d3il9istve5iba",
         "USER": "acsdeorgfmjeap",
