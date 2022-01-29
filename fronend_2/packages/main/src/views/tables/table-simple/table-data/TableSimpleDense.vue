@@ -113,6 +113,7 @@ export default {
   methods: {
     store_scanid(scan_id) {
       console.log("action has been dispatched");
+      this.$router.push({ name: "Analysis Charts" });
       this.$store.dispatch("set_scanid", scan_id);
       this.$store.dispatch("display_message");
     },

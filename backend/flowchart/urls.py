@@ -16,6 +16,11 @@ urlpatterns = [
     path('get-scanids/', GetScanId.as_view(), name='get_scanids'),
     path('get-all-registered-users/', GetAllUsers.as_view(), name="GetAllUsers"),
     path('scan/', Scan.as_view(), name="Scan"),
+    path('get-findings-data/', GetAllIssues.as_view(), name="GetAllIssues"),
+    path('send-scan-data/', GetStartScanData.as_view(), name="GetStartScanData"),
+    path('send-usecase-data/', PostUseCaseData.as_view(), name="PostUseCaseData"),
+    path('critical-assets/', CriticalAssetsData.as_view(), name="CriticalAssetsData")
+
 
 
 ]

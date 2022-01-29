@@ -519,3 +519,8 @@ class RegisteredUsers(models.Model):
     user_lastname = models.CharField(max_length=400)
     password = models.CharField(max_length=50)
     email = models.EmailField(max_length=250)
+
+
+class CriticalAssets(models.Model):
+    ip_id = models.AutoField(primary_key=True)
+    ip = models.CharField(max_length=18)

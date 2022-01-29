@@ -1,3 +1,4 @@
+from html5lib import serialize
 from rest_framework import viewsets
 from flows.models import *
 from .serializers import *
@@ -62,9 +63,10 @@ class LoginUser(APIView):
         userEmail = data['email']
         userPassword = data['password']
         validUser = RegisteredUsers.objects.filter(
-            email=userEmail, password=userPassword)
-        if validUser:
-            return Response({'status': 200, 'message': "Login Sucessfull "})
+            email=userEmail, password=userPassword).values()
+        userDetails = RegisteredUsersSerializer(validUser, many=True)
+        if userDetails:
+            return Response({'status': 200, 'message': "Login Sucessfull ", 'userDetail': userDetails.data})
         else:
             return Response({'status': 500, 'message': "User does not exists "})
 
@@ -94,9 +96,55 @@ class GetAllUsers(APIView):
         serialize = RegisteredUsersSerializer(allUsers, many=True)
         return Response({'status': 200, 'data': serialize.data})
 
+
 class Scan(APIView):
-    def get(self,request):
-        return Response({'status':200,'message':'Scan API has been called'})
+    def get(self, request):
+        return Response({'status': 200, 'message': 'Scan API has been called'})
+
+
+class GetAllIssues(APIView):
+    def get(self, request):
+        # scan_id = request.GET.get("scan_id",)
+        # data = FindingsTbl.objects.filter(scan_id=scan_id).values()
+        data = FindingsTbl.objects.all().values()
+        serialize = FindingtblSerailizer(data, many=True)
+        return Response({'status': 200, 'findings_data': serialize.data})
+
+
+class GetStartScanData(APIView):
+    def post(self, request):
+        data = request.data
+        print(data)
+        return Response({'status': 200, 'message': 'Data has been recieved on the backend'})
+
+
+class PostUseCaseData(APIView):
+    def post(self, request):
+        data = request.data
+        print(data)
+        return Response({'status': 200, 'message': 'The data has been recieved on the backend.'})
+
+
+class CriticalAssetsData(APIView):
+    def post(self, request):
+        ipSet = request.data
+        serialize = CriticalAssetsSerializer(data=ipSet, many=True)
+        if serialize.is_valid():
+            serialize.save()
+        else:
+            print(serialize.errors)
+        return Response({'status': 200, 'message': 'data has been saved in the table.'})
+
+    def get(self, request):
+        ipSet = CriticalAssets.objects.all()
+        serialize = CriticalAssetsSerializer(ipSet, many=True)
+        if serialize:
+            return Response({'status': 200, 'ip_set': serialize.data})
+        else:
+            print(serialize.errors)
+            return Response({'status': 500, 'error': 'could not fetch the data.'})
+
+
 class SnippetList(APIView):
     """
     List all snippets, or create a new snippet.
@@ -122,6 +170,7 @@ class SnippetList(APIView):
         f7 = flows_1(id=7, flowid=3, nodename='node A',
                      relationship='relationship to B')
         f7.save()
+
         f8 = flows_1(id=8, flowid=3, nodename='node B',
                      relationship='relationship to C')
         f8.save()

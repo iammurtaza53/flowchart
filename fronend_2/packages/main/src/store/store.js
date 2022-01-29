@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     scanID: null,
+    baseUrl: "http://localhost:8000/",
     displayMessage: null,
     Sidebar_drawer: null,
     Customizer_drawer: false,

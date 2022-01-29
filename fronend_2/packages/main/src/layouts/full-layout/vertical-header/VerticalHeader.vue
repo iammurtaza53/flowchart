@@ -60,14 +60,18 @@
       </template>
     </v-card>
     <v-spacer />
-    <span class="justify display-2" v-if="$store.state.displayMessage">{{
+
+    <!-- showw scan id  -->
+    <!-- <span class="justify display-2" v-if="$store.state.displayMessage">{{
       $store.state.displayMessage
-    }}</span>
+    }}</span> -->
+    <!-- show scan id -->
+
     <!---/Search part -->
     <v-spacer />
     <!---right part -->
     <!---Notification -->
-    <v-menu
+    <!-- <v-menu
       bottom
       left
       offset-y
@@ -105,10 +109,10 @@
           </v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
+    </v-menu> -->
     <!---Notification -->
     <!---Messages -->
-    <v-menu
+    <!-- <v-menu
       bottom
       left
       offset-y
@@ -162,7 +166,7 @@
           </v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
+    </v-menu> -->
     <!---Messages -->
     <!---User -->
     <v-menu
@@ -193,8 +197,10 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>Donathan Deo</v-list-item-title>
-            <v-list-item-subtitle>Webdesigner</v-list-item-subtitle>
+              <v-list-item-title>{{
+                userDetails.user_firstname + " " + userDetails.user_lastname
+              }}</v-list-item-title>
+            <!-- <v-list-item-subtitle>Webdesigner</v-list-item-subtitle> -->
           </v-list-item-content>
 
           <v-list-item-action>
@@ -236,6 +242,7 @@ export default {
     },
   },
   data: () => ({
+    userDetails: {},
     showLogo: true,
     showSearch: false,
     fav: true,
@@ -304,7 +311,7 @@ export default {
       { title: "My Balance", to: "/apps/contact-grid" },
       { title: "Inbox", to: "/apps/email/inbox" },
       { title: "Account Setting", to: "/form-layouts/flformbasic" },
-      { title: "Logout", to: "/authentication/boxedlogin" },
+      { title: "Logout", to: "/" },
     ],
     href() {
       return undefined;
@@ -326,6 +333,13 @@ export default {
     searchbox: function () {
       this.showSearch = !this.showSearch;
     },
+    set_userDetail() {
+      this.userDetails = JSON.parse(localStorage.getItem("user"));
+    },
+  },
+
+  created() {
+    this.set_userDetail();
   },
 };
 </script>

@@ -178,7 +178,11 @@ export default {
                 });
               });
               this.response = res.data["message"];
-              localStorage.setItem("user", this.userAuthentication.email);
+
+              localStorage.setItem(
+                "user",
+                JSON.stringify(res.data["userDetail"][0])
+              );
               this.$router.push({ path: "/analysis/charts" });
             } else {
               this.response = res.data["message"];

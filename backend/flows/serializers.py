@@ -19,8 +19,21 @@ class RegisteredUsersSerializer(ModelSerializer):
     class Meta:
         model = RegisteredUsers
         fields = "__all__"
-        
+
+
 class ScanIdTblSerializer(ModelSerializer):
     class Meta:
         model = ScanIdTbl
         fields = ['scan_id']
+
+
+class FindingtblSerailizer(ModelSerializer):
+    class Meta:
+        model = FindingsTbl
+        fields = '__all__'
+
+
+class CriticalAssetsSerializer(ModelSerializer):
+    class Meta:
+        model = CriticalAssets
+        fields = '__all__'

@@ -14,7 +14,8 @@
         >
           <router-view></router-view>
         </transition>
-        <v-btn
+        <!-- customizer button -->
+        <!-- <v-btn
           bottom
           color="success"
           dark
@@ -24,7 +25,8 @@
           @click.stop="setCustomizerDrawer(!Customizer_drawer)"
         >
           <v-icon>mdi-cog</v-icon>
-        </v-btn>
+        </v-btn> -->
+        <!-- cutomizer button -->
       </v-container>
     </v-main>
     <VerticalSidebar
@@ -33,7 +35,7 @@
     ></VerticalSidebar>
     <HorizontalSidebar v-else></HorizontalSidebar>
 
-    <Customizer v-model="expandOnHover"></Customizer>
+    <!-- <Customizer v-model="expandOnHover"></Customizer> -->
 
     <Footer v-if="!setHorizontalLayout"></Footer>
     <HorizontalFooter v-else></HorizontalFooter>

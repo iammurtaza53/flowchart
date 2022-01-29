@@ -15,7 +15,7 @@
             hide-details
           ></v-text-field>
         </v-card-title>
-        <!-- search bar end -->
+        <!-- search bar  -->
         <v-data-table
           :headers="tableHeaders"
           :items="userData"

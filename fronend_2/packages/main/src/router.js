@@ -54,6 +54,40 @@ const router = new Router({
           component: () => import("@/views/pages/UserManagement")
 
         },
+        {
+          name: "TableDatatable",
+          path: "/tables/TableDatatable",
+          component: () =>
+            import("@/views/pages/Findings"),
+        },
+        {
+          name: "StartScan",
+          path: "/start-scan",
+          component: () =>
+            import("@/views/pages/StartScan"),
+        },
+        {
+          name: "UseCase",
+          path: "/use-case",
+          component: () =>
+            import("@/views/pages/UseCases"),
+        },
+        {
+          name: "Critical Assets",
+          path: "/critical-assets",
+          component: () =>
+            import("@/views/pages/CriticalAssets"),
+        },
+        {
+          name: "Analysis Charts",
+          path: "/analysis/charts",
+          component: () => import("@/views/pages/ApexCharts"),
+        },
+        {
+          name: "Flowchart",
+          path: "/flowchart",
+          component: () => import("@/views/pages/Flowcharts"),
+        },
         // Application
         // {
         //   name: "Apps",
@@ -376,11 +410,7 @@ const router = new Router({
         //   path: "/style-animation/scroll",
         //   component: () => import("@/views/style-animation/Scroll"),
         // },
-        {
-          name: "ApexCharts",
-          path: "/analysis/charts",
-          component: () => import("@/views/pages/ApexCharts"),
-        },
+
         // {
         //   name: "Analytical",
         //   path: "dashboards/analytical",
@@ -550,12 +580,7 @@ const router = new Router({
         //   component: () =>
         //     import("@/views/tables/table-data-iterators/TableDataIterators"),
         // },
-        {
-          name: "TableDatatable",
-          path: "/tables/TableDatatable",
-          component: () =>
-            import("@/views/tables/table-data-table/TableDatatable"),
-        },
+
         // {
         //   name: "FormValidation",
         //   path: "form-layouts/FormValidation",
