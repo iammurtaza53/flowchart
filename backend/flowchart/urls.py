@@ -6,9 +6,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", flowChart, name="flowchart"),
     path("post-data/", SnippetList.as_view(), name="post-data"),
-    path("flows", FlowsSerializerViewSet.as_view(
-        {"get": "list"}), name="flows"),
-    path("register-user-data/", RegisterUser.as_view(), name="flows"),
+    path(
+        "flows/", FlowsSerializerViewSet.as_view({"get": "list"}), name="flows"),
+    path("register/", RegisterUser.as_view(), name="flows"),
     re_path(r'^get-final-host-os-data/$', GetFinalHostOSData.as_view(),
             name="GetFinalHostOSData"),
     path('authenticate-user/', LoginUser.as_view(),
@@ -19,7 +19,8 @@ urlpatterns = [
     path('get-findings-data/', GetAllIssues.as_view(), name="GetAllIssues"),
     path('send-scan-data/', GetStartScanData.as_view(), name="GetStartScanData"),
     path('send-usecase-data/', PostUseCaseData.as_view(), name="PostUseCaseData"),
-    path('critical-assets/', CriticalAssetsData.as_view(), name="CriticalAssetsData")
+    path('critical-assets/', CriticalAssetsData.as_view(),
+         name="CriticalAssetsData")
 
 
 

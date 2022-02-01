@@ -55,7 +55,7 @@
                   <v-btn
                     class="float-sm-end white--text"
                     color="#127c62"
-                    @click="user_data()"
+                    @click="register()"
                     >Add User</v-btn
                   >
                 </v-card-actions>
@@ -67,8 +67,9 @@
     </v-container>
   </v-card>
 </template>
+
 <script>
-import axios from "axios";
+import repository from "../../store/repository";
 export default {
   data() {
     return {
@@ -78,20 +79,18 @@ export default {
         email: null,
         password: null,
       },
-      emptyField: false,
     };
   },
   methods: {
-    user_data() {
-      Object.values(this.userData).forEach((field) => {
-        if (field === null) this.emptyField = true;
-      });
-      if (this.emptyField) {
-        this.$refs.userData.validate();
-      } else {
-        let url = "http://localhost:8000/register-user-data/";
-        axios.post(url, this.userData).then((res) => {
-          if (res["status"] == 200) console.log(res["message"]);
+    register() {
+      if (tthis.$refs.userData.validate()) {
+        repository.post("register/", this.userData).then((res) => {
+          if (res["status"] == 200) {
+            this.userData = {};
+            this.$refs.userData.resetValidation();
+          } else {
+            console.log(res["message"]);
+          }
         });
         this.$refs.userData.resetValidation();
       }
@@ -99,6 +98,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .v-text-field {
   min-width: 0px;

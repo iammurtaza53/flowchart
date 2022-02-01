@@ -17,7 +17,7 @@ const router = new Router({
       scrollTo = savedPosition.y;
     }
 
-    return goTo(scrollTo);
+    return goTo(scrollTo);  
   },
   // This is for the scroll top when click on any router link
   routes: [

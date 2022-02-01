@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from flows.models import *
+from django.contrib.auth.models import User
 
 
 class FlowsSerializer(ModelSerializer):
@@ -15,9 +16,9 @@ class FinalHostsSerializer(ModelSerializer):
         fields = ['os']
 
 
-class RegisteredUsersSerializer(ModelSerializer):
+class UserSerializer(ModelSerializer):
     class Meta:
-        model = RegisteredUsers
+        model = User
         fields = "__all__"
 
 

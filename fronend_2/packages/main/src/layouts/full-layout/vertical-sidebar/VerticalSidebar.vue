@@ -19,9 +19,9 @@
       </v-list-item-avatar>
 
       <v-list-item-content>
-        <v-list-item-title>{{
-          userDetails.user_firstname + " " + userDetails.user_lastname
-        }}</v-list-item-title>
+        <v-list-item-title>
+          {{ userDetails.first_name + " " + userDetails.last_name }}
+        </v-list-item-title>
         <!-- <v-list-item-subtitle class="caption">Webdesigner</v-list-item-subtitle> -->
       </v-list-item-content>
     </v-list-item>

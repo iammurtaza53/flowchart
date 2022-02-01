@@ -9,10 +9,12 @@
       ></v-select>
       <v-btn color="primary" @click="send_useCase_data()">INSERT</v-btn>
     </BaseCard>
+    <BaseCard v-if="responseIP" heading="IP">{{ responseIP }} </BaseCard>
   </v-container>
 </template>
+
 <script>
-import axios from "axios";
+import repository from "../../store/repository";
 export default {
   data: () => ({
     items: [
@@ -24,7 +26,7 @@ export default {
       "issue 6",
       "issue 7",
     ],
-
+    responseIP: null,
     useCaseData: {
       IP: null,
       Issue: null,
@@ -33,9 +35,8 @@ export default {
 
   methods: {
     send_useCase_data() {
-      var url = this.$store.state.baseUrl + "send-usecase-data/";
-      axios.post(url, this.useCaseData).then((res) => {
-        console.log(res.data["message"]);
+      repository.post("send-usecase-data/", this.useCaseData).then((res) => {
+        this.responseIP = res["IP"];
       });
     },
   },

@@ -60,9 +60,7 @@ export default {
   data: () => ({
     userAuthentication: {
       email: "johndoe@gmail.com",
-      password: "iamjohndoe",
-      //   email: null,
-      //   password: null,
+      password: "iamjohndoe"
     },
   }),
   methods: {

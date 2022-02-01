@@ -139,8 +139,8 @@ export default {
 
   data: () => ({
     userAuthentication: {
-      email: "johndoe@gmail.com",
-      password: "iamjohndoe",
+      email: "test@gmail.com",
+      password: "12345678",
     },
     showPassword: false,
     valid: true,
@@ -161,7 +161,6 @@ export default {
   computed: {},
   methods: {
     authenticate_user() {
-      this.$refs.form.validate();
       if (this.$refs.form.validate(true)) {
         axios
           .post(
@@ -173,28 +172,15 @@ export default {
               var url = "http://localhost:8000/get-scanids/";
               axios.get(url).then((res) => {
                 res.data["scan-id"].forEach((scanid) => {
-                  console.log(scanid[0]);
                   this.$store.dispatch("set_scanid", scanid[0]);
                 });
               });
-              this.response = res.data["message"];
-
-              localStorage.setItem(
-                "user",
-                JSON.stringify(res.data["userDetail"][0])
-              );
+              localStorage.setItem("user", JSON.stringify(res.data["user"]));
               this.$router.push({ path: "/analysis/charts" });
             } else {
               this.response = res.data["message"];
             }
           });
-
-        // var url = "http://localhost:8000/get-scanids/";
-        // axios.get(url).then((res) => {
-        //   res.data["scan-id"].forEach((scanid) => {
-        //     console.log(scanid);
-        //   });
-        // });
       }
     },
   },

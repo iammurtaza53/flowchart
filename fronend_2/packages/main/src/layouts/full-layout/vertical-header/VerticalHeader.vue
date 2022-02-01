@@ -21,10 +21,7 @@
       </span>
     </v-toolbar-title> -->
     <!---Dark Logo part -->
-    <v-toolbar-title
-      class="align-center d-flex logo-width"
-      :class="`${showLogo ? 'logo-width' : ''}`"
-    >
+    <v-toolbar-title class="align-center d-flex logo-width showLogo">
       <span class="logo-icon">
         <img src="../../../assets/images/logo-icon.png" class="mt-2" />
       </span>
@@ -34,7 +31,7 @@
     </v-toolbar-title>
     <!---Logo part -->
     <!---/Toggle sidebar part -->
-    <div @click="showhideLogo">
+    <div>
       <v-app-bar-nav-icon
         @click="
           $vuetify.breakpoint.smAndDown
@@ -197,9 +194,9 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-              <v-list-item-title>{{
-                userDetails.user_firstname + " " + userDetails.user_lastname
-              }}</v-list-item-title>
+            <v-list-item-title>
+              {{ userDetails.first_name + " " + userDetails.last_name }}
+            </v-list-item-title>
             <!-- <v-list-item-subtitle>Webdesigner</v-list-item-subtitle> -->
           </v-list-item-content>
 
@@ -326,9 +323,6 @@ export default {
     ...mapMutations({
       setSidebarDrawer: "SET_SIDEBAR_DRAWER",
     }),
-    showhideLogo: function () {
-      this.showLogo = !this.showLogo;
-    },
 
     searchbox: function () {
       this.showSearch = !this.showSearch;

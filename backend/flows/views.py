@@ -1,14 +1,12 @@
-from html5lib import serialize
 from rest_framework import viewsets
 from flows.models import *
 from .serializers import *
-import json
-from django.core import serializers
-from rest_framework.renderers import JSONRenderer
 from django.shortcuts import render
 from .models import flows_1
-from rest_framework.decorators import api_view, APIView
+from rest_framework.decorators import APIView
 from rest_framework.response import Response
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
@@ -42,31 +40,29 @@ def flowChart(request):
 
 class RegisterUser(APIView):
     def post(self, request):
-        userData = request.data
-        registeredUser = RegisteredUsers.objects.filter(
-            email=userData['email'])
-        if not registeredUser:
-            registerUser = RegisteredUsers()
-            registerUser.user_firstname = userData['firstName']
-            registerUser.user_lastname = userData['lastName']
-            registerUser.email = userData['email']
-            registerUser.password = userData['password']
-            registerUser.save()
 
-            return Response({'status': 200, 'message': 'The User has been registered '})
+        data = request.data
+        user = User.objects.filter(email=data['email'])
+        if not user:
+            try:
+                user = User.objects.create_user(username=data['email'], first_name=data['firstName'], last_name=data['lastName'],
+                                                email=data['email'], password=data['password'])
+                user.save()
+
+                return Response({'status': 200, 'message': 'The User has been registered '})
+            except Exception as error:
+                print(error)
         return Response({'status': 500, 'message': 'User already exists.'})
 
 
 class LoginUser(APIView):
     def post(self, request):
         data = request.data
-        userEmail = data['email']
-        userPassword = data['password']
-        validUser = RegisteredUsers.objects.filter(
-            email=userEmail, password=userPassword).values()
-        userDetails = RegisteredUsersSerializer(validUser, many=True)
-        if userDetails:
-            return Response({'status': 200, 'message': "Login Sucessfull ", 'userDetail': userDetails.data})
+        user = authenticate(username=data['email'], password=data['password'])
+        if user is not None:
+            login(request, user)
+            user = UserSerializer(user)
+            return Response({'status': 200, 'message': "Login Sucessfull ", 'user': user.data})
         else:
             return Response({'status': 500, 'message': "User does not exists "})
 
@@ -87,13 +83,13 @@ class GetScanId(APIView):
         scanIds = ScanIdTbl.objects.all().order_by('scan_id')
         scanIds = ScanIdTblSerializer(scanIds, many=True)
         if scanIds:
-            return Response({'status': 200, 'scan-id': scanIds.data})
+            return Response({'status': 200, 'scans': scanIds.data})
 
 
 class GetAllUsers(APIView):
     def get(self, request):
-        allUsers = RegisteredUsers.objects.all()
-        serialize = RegisteredUsersSerializer(allUsers, many=True)
+        allUsers = User.objects.all()
+        serialize = UserSerializer(allUsers, many=True)
         return Response({'status': 200, 'data': serialize.data})
 
 
@@ -122,7 +118,7 @@ class PostUseCaseData(APIView):
     def post(self, request):
         data = request.data
         print(data)
-        return Response({'status': 200, 'message': 'The data has been recieved on the backend.'})
+        return Response({'status': 200, 'IP': data["IP"]})
 
 
 class CriticalAssetsData(APIView):

@@ -9,15 +9,17 @@
 
     <BaseCard>
       <IpTable
-        :userData="tableData"
+        :data="tableData"
         :tableHeaders="tableHeader"
         :loading="loading"
       ></IpTable>
     </BaseCard>
   </v-container>
 </template>
+
+
 <script>
-import axios from "axios";
+import repository from "../../store/repository";
 export default {
   components: {
     IpTable: () => import("@/views/UserManagementComponents/Userstable.vue"),
@@ -39,26 +41,23 @@ export default {
       ipSet.forEach((IP) => {
         data.push({ ip: IP });
       });
-      var url = this.$store.state.baseUrl + "critical-assets/";
-      axios.post(url, data).then((res) => {
-        console.log(res.data["message"]);
+      repository.post("critical-assets/", data).then((res) => {
         this.ip = null;
-        this.get_criticalassets_data();
+        this.get_critical_assets_data();
       });
     },
 
-    get_criticalassets_data() {
-      this.loading=true
-      var url = this.$store.state.baseUrl + "critical-assets/";
-      axios.get(url).then((res) => {
-        this.tableData = res.data["ip_set"];
+    get_critical_assets_data() {
+      this.loading = true;
+      repository.get("critical-assets/").then((res) => {
+        this.tableData = res["ip_set"];
         this.loading = false;
       });
     },
   },
 
   created() {
-    this.get_criticalassets_data();
+    this.get_critical_assets_data();
   },
 };
 </script>

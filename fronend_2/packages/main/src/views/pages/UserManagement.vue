@@ -2,38 +2,34 @@
   <v-container>
     <BaseCard heading="USER MANAGEMENT">
       <UserTable
-        :userData="userData"
+        :data="users"
         :tableHeaders="headers"
         :loading="loading"
       ></UserTable>
     </BaseCard>
   </v-container>
 </template>
+
 <script>
-import axios from "axios";
+import repository from "../../store/repository";
 export default {
   components: {
     UserTable: () => import("@/views/UserManagementComponents/Userstable.vue"),
   },
   data: () => ({
-    userData: [],
+    users: [],
     headers: [
-      { text: "FIRST NAME", value: "user_firstname" },
-      { text: "LAST NAME", value: "user_lastname" },
+      { text: "FIRST NAME", value: "first_name" },
+      { text: "LAST NAME", value: "last_name" },
       { text: "EMAIL", value: "email" },
     ],
     loading: true,
   }),
   computed: {},
   methods: {
-
     get_all_users() {
-      var url = "http://localhost:8000/get-all-registered-users/";
-      axios.get(url).then((res) => {
-        var data = res.data.data;
-        data.forEach((user) => {
-          this.userData.push(user);
-        });
+      repository.get("get-all-registered-users/").then((res) => {
+        this.users = res.data;
         this.loading = false;
       });
     },

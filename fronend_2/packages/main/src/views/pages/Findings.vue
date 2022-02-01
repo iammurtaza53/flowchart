@@ -2,15 +2,18 @@
   <v-container>
     <BaseCard heading="FINDINGS">
       <UserTable
-        :userData="tableData"
+        :data="tableData"
         :tableHeaders="tableHeaders"
         :loading="loading"
+        :click_row="true"
       ></UserTable>
     </BaseCard>
   </v-container>
 </template>
+
 <script>
-import axios from "axios";
+import repository from "../../store/repository";
+
 export default {
   components: {
     UserTable: () => import("@/views/UserManagementComponents/Userstable.vue"),
@@ -30,9 +33,8 @@ export default {
   methods: {
     get_findings_table() {
       this.loading = true;
-      var url = "http://localhost:8000/get-findings-data/";
-      axios.get(url).then((res) => {
-        this.tableData = res.data["findings_data"];
+      repository.get("get-findings-data/").then((res) => {
+        this.tableData = res["findings_data"];
         this.loading = false;
       });
     },

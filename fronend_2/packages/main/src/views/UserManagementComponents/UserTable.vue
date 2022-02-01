@@ -20,8 +20,8 @@
           </thead>
           <tbody>
             <tr v-for="(user, index) in userData" :key="index">
-              <td class="display-2">{{ user.user_firstname }}</td>
-              <td class="display-2">{{ user.user_lastname }}</td>
+              <td class="display-2">{{ user.first_name }}</td>
+              <td class="display-2">{{ user.last_name }}</td>
               <td class="display-2">{{ user.email }}</td>
             </tr>
           </tbody>

@@ -16,8 +16,9 @@
     </BaseCard>
   </v-container>
 </template>
+
 <script>
-import axios from "axios";
+import repository from "../../store/repository";
 export default {
   data: () => ({
     checkboxData: {
@@ -31,10 +32,8 @@ export default {
 
   methods: {
     send_scan_data() {
-      var url = "http://localhost:8000/send-scan-data/";
-
-      axios.post(url, this.checkboxData).then((res) => {
-        console.log(res.data["message"]);
+      repository.post("send-scan-data/", this.checkboxData).then((res) => {
+        console.log(res["message"]);
       });
     },
   },

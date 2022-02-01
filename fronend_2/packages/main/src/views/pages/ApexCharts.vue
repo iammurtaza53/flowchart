@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import repository from "../../store/repository";
 export default {
   name: "ApexCharts",
 
@@ -56,20 +56,16 @@ export default {
   },
   methods: {
     get_host_data() {
-      axios
-        .get("http://localhost:8000/get-final-host-os-data/?scan_id=" + 0)
-        .then((res) => {
-          var data = res.data;
+      repository.get("get-final-host-os-data/?scan_id=" + 0).then((res) => {
+        Object.values(res.data).forEach((res) => {
+          this.os = res.os.split(" ")[0];
 
-          Object.values(data.data).forEach((res) => {
-            this.os = res.os.split(" ")[0];
-
-            if (this.os === "Windows") {
-              this.osCount["windows"] += 1;
-            } else this.osCount["unix"] += 1;
-          });
-          this.reRender++;
+          if (this.os === "Windows") {
+            this.osCount["windows"] += 1;
+          } else this.osCount["unix"] += 1;
         });
+        this.reRender++;
+      });
     },
   },
   components: {

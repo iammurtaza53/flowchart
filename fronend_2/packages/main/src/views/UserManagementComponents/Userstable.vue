@@ -18,12 +18,27 @@
         <!-- search bar  -->
         <v-data-table
           :headers="tableHeaders"
-          :items="userData"
+          :items="data"
           :search="search"
           class="border"
           :loading="loading"
           loading-text="FETCHING USERS"
         >
+          <template v-slot:body="{ items }" v-if="click_row">
+            <tbody>
+              <tr
+                v-for="(item, index) in items"
+                :key="index"
+                @click="clicked_row(item)"
+              >
+                <td>{{ item.name }}</td>
+                <td>{{ item.risk }}</td>
+                <td>{{ item.count }}</td>
+                <td>{{ item.attackmitre }}</td>
+                <td>{{ item.sia }}</td>
+              </tr>
+            </tbody>
+          </template>
         </v-data-table>
       </v-card>
     </div>
@@ -33,9 +48,15 @@
 <script>
 export default {
   name: "AllUser",
-  props: ["tableHeaders", "userData", "loading"],
+  props: ["tableHeaders", "data", "loading", "click_row"],
   data: () => ({
     search: "",
   }),
+  methods: {
+    clicked_row(row) {
+      console.log("You have clicked a row.");
+      console.log(row);
+    },
+  },
 };
 </script>
