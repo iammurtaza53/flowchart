@@ -78,6 +78,17 @@ class GetFinalHostOSData(APIView):
             return Response({'status': 500})
 
 
+class GetRiskSeverityData(APIView):
+    def get(self, request):
+        scan_id = request.GET.get('scan_id')
+        data = FindingsTbl.objects.filter(scan_id=scan_id).values('risk')
+        if data:
+            serializer = RiskSerializer(data, many=True)
+            return Response({'status': 200, 'data': serializer.data})
+        else:
+            return Response({'status': 500})
+
+
 class GetScanId(APIView):
     def get(self, request):
         scanIds = ScanIdTbl.objects.all().order_by('scan_id')
@@ -100,8 +111,6 @@ class Scan(APIView):
 
 class GetAllIssues(APIView):
     def get(self, request):
-        # scan_id = request.GET.get("scan_id",)
-        # data = FindingsTbl.objects.filter(scan_id=scan_id).values()
         data = FindingsTbl.objects.all().values()
         serialize = FindingtblSerailizer(data, many=True)
         return Response({'status': 200, 'findings_data': serialize.data})
@@ -176,3 +185,23 @@ class SnippetList(APIView):
         # serializer.save()
 
         return Response({'message': 'success'})
+
+
+class GetIssuesByName(APIView):
+    def get(self, request):
+        scan_id = request.GET.get("scan_id",)
+        issue_name = request.GET.get("issue_name",)
+
+        if issue_name == 'issue1':
+            data = issue1Tbl.objects.filter(scan_id=scan_id).values()
+            serialize = Issue1Serializer(data, many=True)
+
+        elif issue_name == 'issue2':
+            data = issue2Tbl.objects.filter(scan_id=scan_id).values()
+            serialize = Issue2Serializer(data, many=True)
+
+        elif issue_name == 'issue7':
+            data = issue7Tbl.objects.filter(scan_id=scan_id).values()
+            serialize = Issue7Serializer(data, many=True)
+
+        return Response({'status': 200, 'issues': serialize.data})

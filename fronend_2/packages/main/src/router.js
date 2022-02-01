@@ -61,6 +61,12 @@ const router = new Router({
             import("@/views/pages/Findings"),
         },
         {
+          name: "Subnets",
+          path: "/subnets",
+          component: () =>
+            import("@/views/pages/Subnets"),
+        },
+        {
           name: "StartScan",
           path: "/start-scan",
           component: () =>

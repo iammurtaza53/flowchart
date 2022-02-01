@@ -1,10 +1,10 @@
 <template>
   <v-footer app class="footerpart" inset>
     <v-col cols="12">
-      <span class="font-weight-medium"
+      <!-- <span class="font-weight-medium"
         >© {{ new Date().getFullYear() }} — Admin Pro Admin by
         <a href="https://www.wrappixel.com/">wrappixel.com</a></span
-      >
+      > -->
     </v-col>
   </v-footer>
 </template>

@@ -11,6 +11,8 @@ urlpatterns = [
     path("register/", RegisterUser.as_view(), name="flows"),
     re_path(r'^get-final-host-os-data/$', GetFinalHostOSData.as_view(),
             name="GetFinalHostOSData"),
+    re_path(r'^get-risk-severity/$', GetRiskSeverityData.as_view(),
+            name="GetRiskSeverityData"),
     path('authenticate-user/', LoginUser.as_view(),
          name="authenticate_user"),
     path('get-scanids/', GetScanId.as_view(), name='get_scanids'),
@@ -20,7 +22,9 @@ urlpatterns = [
     path('send-scan-data/', GetStartScanData.as_view(), name="GetStartScanData"),
     path('send-usecase-data/', PostUseCaseData.as_view(), name="PostUseCaseData"),
     path('critical-assets/', CriticalAssetsData.as_view(),
-         name="CriticalAssetsData")
+         name="CriticalAssetsData"),
+    re_path(r'^get-issues-by-name/$', GetIssuesByName.as_view(),
+            name="GetIssuesByName")
 
 
 
