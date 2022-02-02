@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <BaseCard heading="Use Case">
+    <BaseCard heading="Admininstration">
       <v-text-field label="Admininstration" v-model="data"> </v-text-field>
       <v-btn color="primary" @click="send_useCase_data()">Submit</v-btn>
     </BaseCard>
