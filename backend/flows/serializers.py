@@ -13,7 +13,7 @@ class FlowsSerializer(ModelSerializer):
 class FinalHostsSerializer(ModelSerializer):
     class Meta:
         model = FinalHostsTbl
-        fields = ['os']
+        fields = "__all__"
 
 
 class UserSerializer(ModelSerializer):

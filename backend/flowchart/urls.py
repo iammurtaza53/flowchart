@@ -20,7 +20,9 @@ urlpatterns = [
     path('send-scan-data/', GetStartScanData.as_view(), name="GetStartScanData"),
     path('send-usecase-data/', PostUseCaseData.as_view(), name="PostUseCaseData"),
     path('critical-assets/', CriticalAssetsData.as_view(),
-         name="CriticalAssetsData")
+         name="CriticalAssetsData"),
+    path('download-final-hosts/', DownloadFinalHost.as_view(),
+         name="DownloadFinalHost"),
 
 
 

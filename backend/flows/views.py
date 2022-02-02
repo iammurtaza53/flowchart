@@ -7,6 +7,8 @@ from rest_framework.decorators import APIView
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+import xlsxwriter
+import csv
 
 # Create your views here.
 
@@ -70,7 +72,7 @@ class LoginUser(APIView):
 class GetFinalHostOSData(APIView):
     def get(self, request):
         scan_id = request.GET.get('scan_id')
-        data = FinalHostsTbl.objects.filter(scan_id=scan_id).values('os')
+        data = FinalHostsTbl.objects.filter(scan_id=scan_id).values()
         if data:
             serializer = FinalHostsSerializer(data, many=True)
             return Response({'status': 200, 'data': serializer.data})
@@ -139,6 +141,57 @@ class CriticalAssetsData(APIView):
         else:
             print(serialize.errors)
             return Response({'status': 500, 'error': 'could not fetch the data.'})
+
+
+class DownloadFinalHost(APIView):
+    def get(self, request):
+        # row, column = 0, 0
+        finalhosts = FinalHostsTbl.objects.all().values()
+        serialize = FinalHostsSerializer(finalhosts, many=True)
+        columnNames = ['scan_id', 'host', "hostname", 'os',
+                       'subnet', 'compromised', 'timpestamp']
+        with open('FinalHost.csv', 'w', encoding='UTF8', newline='') as f:
+            writer = csv.DictWriter(
+                f, fieldnames=columnNames, extrasaction='ignore')
+            writer.writeheader()
+            writer.writerows(serialize.data)
+                # for data in row:
+                # writer.writerows(data)
+                # workbook = xlsxwriter.Workbook('FinalHosts.xlsx')
+                # worksheet = workbook.add_worksheet()
+                # # Add a bold format to use to highlight cells.
+                # bold = workbook.add_format({'bold': True})
+                # # adding column names in worksheet
+                # columnNames = ['Scan Id', 'Host', "Host Name", 'OS',
+                #                'Subnet', 'Compromised', 'TimeStamp']
+                # # adding column names in worksheet
+                # # setting starting column and row
+                # column, row = 1, 1
+                # for header in columnNames:
+                #     worksheet.write(row, column, header, bold)
+                #     column += 1
+                # # adding column names in worksheet
+
+                # # adding data in worksheet
+                # # setting starting row
+                # row = 2
+                # for excelData in serialize.data:
+                #     # setting starting column for each row
+                #     column = 1
+                #     for field in excelData:
+                #         if field != "id":
+                #             worksheet.write(row, column, excelData[field])
+                #             column += 1
+                #     row += 1
+                # # adding data in worksheet
+
+                # # Setting column width (formatting)
+                # worksheet.set_column('D:E', 30)
+                # for column in ('C', 'F', 'G', 'H'):
+                #     worksheet.set_column(f'{column}:{column}', 15)
+
+                # workbook.close()
+        return Response({'status': 200})
 
 
 class SnippetList(APIView):
