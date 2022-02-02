@@ -17,7 +17,7 @@ const router = new Router({
       scrollTo = savedPosition.y;
     }
 
-    return goTo(scrollTo);  
+    return goTo(scrollTo);
   },
   // This is for the scroll top when click on any router link
   routes: [
@@ -59,6 +59,12 @@ const router = new Router({
           path: "/tables/TableDatatable",
           component: () =>
             import("@/views/pages/Findings"),
+        },
+        {
+          name: "Subnets",
+          path: "/subnets",
+          // component: () =>
+          //   import("@/views/pages/Subnets"),
         },
         {
           name: "StartScan",

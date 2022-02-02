@@ -54,8 +54,10 @@ export default {
   }),
   methods: {
     clicked_row(row) {
-      console.log("You have clicked a row.");
-      console.log(row);
+      this.$router.push({
+        name: "Subnets",
+        params: { issue: row.name },
+      });
     },
   },
 };

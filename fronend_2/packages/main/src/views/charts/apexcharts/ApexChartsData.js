@@ -257,7 +257,7 @@ export default {
     ],
    
     chartOptions: {
-     
+    
       chart: {
         width: "100%",
         height: 350,
@@ -293,18 +293,6 @@ export default {
           },
         },
       },
-      // fill: {
-      //   colors: [function ({ value}) {
-      //     if (value < 1000 && value >= 500 ) {
-      //       return '#FFBF00'
-      //     }
-      //     else if (value >= 400 && value <500)
-      //       return "#00A300"
-      //     else {
-      //       return '#f00'
-      //     }
-      //   }]
-    // },
       grid: {
         borderColor: "rgba(0,0,0,0.1)",
       },

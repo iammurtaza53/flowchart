@@ -10,7 +10,7 @@
           type="bar"
           height="350"
           :options="apexChartData.barChart.chartOptions"
-          :series="apexChartData.barChart.series"
+          :series="series"
         ></vue-apex-charts>
       </div>
     </div>
@@ -23,6 +23,9 @@ import apexChartData from "../ApexChartsData.js";
 
 export default {
   name: "ApexBarCharts",
+  props: {
+    series: [],
+  },
   data: () => ({
     barchart: false,
     apexChartData: apexChartData,
