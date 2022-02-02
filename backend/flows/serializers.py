@@ -60,3 +60,8 @@ class Issue7Serializer(ModelSerializer):
     class Meta:
         model = issue7Tbl
         fields = '__all__'
+
+class ProgressTblSerializer(ModelSerializer):   
+    class Meta:
+        model = ProgressTbl
+        fields = '__all__'
