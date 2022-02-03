@@ -12,7 +12,6 @@
   </v-container>
 </template>
 
-
 <script>
 import repository from "../../store/repository";
 export default {
