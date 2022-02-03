@@ -6,11 +6,11 @@
     </BaseCard>
 
     <BaseCard heading="Passwords">
-      <IpTable
+      <DataTable
         :data="tableData"
         :tableHeaders="tableHeader"
         :loading="loading"
-      ></IpTable>
+      ></DataTable>
     </BaseCard>
   </v-container>
 </template>
@@ -20,7 +20,7 @@
 import repository from "../../store/repository";
 export default {
   components: {
-    IpTable: () => import("@/views/UserManagementComponents/Userstable.vue"),
+    DataTable: () => import("@/views/pages/DataTable.vue"),
   },
   data: () => ({
     data: null,

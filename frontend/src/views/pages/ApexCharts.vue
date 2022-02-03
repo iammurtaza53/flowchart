@@ -59,43 +59,51 @@ export default {
   },
   methods: {
     get_host_data() {
-      repository.get("get-final-host-os-data/?scan_id=" + 0).then((res) => {
-        Object.values(res.data).forEach((res) => {
-          this.os = res.os.split(" ")[0];
+      let scan_id = localStorage.getItem("scan_id");
+      repository
+        .get("get-final-hosts/?scan_id=" + scan_id)
+        .then((res) => {
+          if (res.data) {
+            Object.values(res.data).forEach((res) => {
+              this.os = res.os.split(" ")[0];
 
-          if (this.os === "Windows") {
-            this.osCount["windows"] += 1;
-          } else this.osCount["unix"] += 1;
+              if (this.os === "Windows") {
+                this.osCount["windows"] += 1;
+              } else this.osCount["unix"] += 1;
+            });
+            this.reRender++;
+          }
         });
-        this.reRender++;
-      });
     },
     get_severity_data() {
-      repository.get("get-risk-severity/?scan_id=" + 0).then((res) => {
-        res.data.forEach((e) => {
-          if (e.risk == "Informational") {
-            this.riskCount["Informational"] =
-              this.riskCount["Informational"] + 1;
-          }
-          if (e.risk == "High") {
-            this.riskCount["High"] = this.riskCount["High"] + 1;
-          }
-          if (e.risk == "Medium") {
-            this.riskCount["Medium"] = this.riskCount["Medium"] + 1;
-          }
-          if (e.risk == "Low") {
-            this.riskCount["Low"] = this.riskCount["Low"] + 1;
-          }
-        });
+      let scan_id = localStorage.getItem("scan_id");
+      repository.get("get-risk-severity/?scan_id=" + scan_id).then((res) => {
+        if (res.data) {
+          res.data.forEach((e) => {
+            if (e.risk == "Informational") {
+              this.riskCount["Informational"] =
+                this.riskCount["Informational"] + 1;
+            }
+            if (e.risk == "High") {
+              this.riskCount["High"] = this.riskCount["High"] + 1;
+            }
+            if (e.risk == "Medium") {
+              this.riskCount["Medium"] = this.riskCount["Medium"] + 1;
+            }
+            if (e.risk == "Low") {
+              this.riskCount["Low"] = this.riskCount["Low"] + 1;
+            }
+          });
 
-        this.risk[0]["data"] = [
-          this.riskCount["Informational"],
-          this.riskCount["Low"],
-          this.riskCount["Medium"],
-          this.riskCount["High"],
-        ];
+          this.risk[0]["data"] = [
+            this.riskCount["Informational"],
+            this.riskCount["Low"],
+            this.riskCount["Medium"],
+            this.riskCount["High"],
+          ];
 
-        this.reRender++;
+          this.reRender++;
+        }
       });
     },
   },

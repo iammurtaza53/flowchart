@@ -36,10 +36,11 @@ export default {
   }),
   methods: {
     get_flow_data() {
-      repository.get("flowchart/").then((res) => {
+      let scan_id = localStorage.getItem("scan_id");
+      repository.get("flowchart/?scan_id=" + scan_id).then((res) => {
         let obj = res.data;
         obj.forEach((field) => {
-          var parentNode = String(field.flowid);
+          var parentNode = String(field.pathid);
 
           if (!this.flowcharts[parentNode]) {
             this.flowcharts[parentNode] = {};
@@ -48,7 +49,7 @@ export default {
             this.flowcharts[parentNode]["nodeComponent"] = "demo-node";
             this.flowcharts[parentNode]["data"] = {};
             this.flowcharts[parentNode]["data"]["nodename"] =
-              field["nodename"].toUpperCase();
+              field["domain"].toUpperCase();
             this.flowcharts[parentNode]["data"]["relationship"] =
               field["relationship"];
             this.flowcharts[parentNode]["data"]["cardColor"] = "#f2f2f2";
@@ -63,7 +64,7 @@ export default {
             this.flowcharts["childNode"]["nodeComponent"] = "demo-node";
             this.flowcharts["childNode"]["data"] = {};
             this.flowcharts["childNode"]["data"]["nodename"] =
-              field["nodename"].toUpperCase();
+              field["domain"].toUpperCase();
             this.flowcharts["childNode"]["data"]["relationship"] =
               field["relationship"];
             this.flowcharts["childNode"]["data"]["cardColor"] = "#f2f2f2";

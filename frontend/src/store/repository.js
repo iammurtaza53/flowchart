@@ -1,4 +1,5 @@
 const axios = require("axios");
+const FileDownload = require("js-file-download");
 
 let baseDomain = "";
 
@@ -68,6 +69,22 @@ export default {
                 return response.data;
             })
             .catch((err) => {
+                return err.response.data;
+            });
+    },
+
+    downloadReport(url) {
+        return instance
+            .get(url, {
+                responseType: "blob",
+            })
+            .then((response) => {
+                FileDownload(response.data, "FinalHost.csv");
+                response = { status: true };
+                return response;
+            })
+            .catch((err) => {
+                console.error(err.response.data);
                 return err.response.data;
             });
     },

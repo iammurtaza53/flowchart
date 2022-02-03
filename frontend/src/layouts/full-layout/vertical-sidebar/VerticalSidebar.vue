@@ -14,15 +14,10 @@
   >
     <!---USer Area -->
     <v-list-item two-line class="profile-bg">
-      <v-list-item-avatar>
-        <img src="https://randomuser.me/api/portraits/men/81.jpg" />
-      </v-list-item-avatar>
-
-      <v-list-item-content>
+      <v-list-item-content v-if="userDetails.first_name">
         <v-list-item-title>
           {{ userDetails.first_name + " " + userDetails.last_name }}
         </v-list-item-title>
-        <!-- <v-list-item-subtitle class="caption">Webdesigner</v-list-item-subtitle> -->
       </v-list-item-content>
     </v-list-item>
     <v-divider></v-divider>
@@ -30,17 +25,8 @@
 
     <v-list expand nav class="mt-1">
       <template v-for="(item, i) in items">
-        <!---If Sidebar Caption -->
-        <v-row v-if="item.header" :key="item.header" align="center">
-          <v-col cols="12">
-            <v-subheader v-if="item.header" class="d-block text-truncate">{{
-              item.header
-            }}</v-subheader>
-          </v-col>
-        </v-row>
-        <!---If Sidebar Caption -->
         <BaseItemGroup
-          v-else-if="item.children"
+          v-if="item.children"
           class="icon-size"
           :key="`group-${i}`"
           :item="item"
@@ -50,37 +36,6 @@
       </template>
       <!---Sidebar Items -->
     </v-list>
-    <!-- <v-divider></v-divider> -->
-
-    <!--- Progress -->
-    <!-- <v-list-item two-line>
-      <v-list-item-content class>
-        <v-list-item-title class="d-flex mb-3 align-center">
-          <span class="body-2 text-truncate">monthly profit</span>
-          <div class="ml-auto">
-            <h6 class="mb-0 info--text">80%</h6>
-          </div>
-        </v-list-item-title>
-        <v-progress-linear rounded value="80"></v-progress-linear>
-      </v-list-item-content>
-    </v-list-item> -->
-
-    <!-- <v-list-item two-line>
-      <v-list-item-content class>
-        <v-list-item-title class="d-flex mb-3 align-center">
-          <span class="body-2 text-truncate">Sales of the year</span>
-          <div class="ml-auto">
-            <h6 class="mb-0 success--text">54%</h6>
-          </div>
-        </v-list-item-title>
-        <v-progress-linear
-          color="success"
-          rounded
-          value="54"
-        ></v-progress-linear>
-      </v-list-item-content>
-    </v-list-item> -->
-    <!--- Progress -->
   </v-navigation-drawer>
 </template>
 

@@ -1,5 +1,4 @@
 from django.db import models
-import uuid
 
 # Create your models here.
 
@@ -511,17 +510,15 @@ class Service902Tbl(models.Model):
         db_table = 'service_902_tbl'
 
 
-class RegisteredUsers(models.Model):
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False)
-    user_firstname = models.CharField(max_length=400)
-    user_lastname = models.CharField(max_length=400)
-    password = models.CharField(max_length=50)
-    email = models.EmailField(max_length=250)
-
-
 class CriticalAssets(models.Model):
     ip_id = models.AutoField(primary_key=True)
     ip = models.CharField(max_length=18)
+
+
+class GreyBoxTbl(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'greybox_tbl'

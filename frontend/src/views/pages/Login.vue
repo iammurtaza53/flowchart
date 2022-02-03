@@ -79,22 +79,22 @@ export default {
       this.response = null;
       if (this.$refs.form.validate(true)) {
         this.submitted = true;
-        repository
-          .post("login/", this.userAuthentication)
-          .then((res) => {
-            if (res["status"] == 200) {
-              repository.get("scans/").then((resp) => {
-                if (resp["scans"]) {
-                  this.$store.dispatch("set_scanid", resp["scans"][0].scan_id);
-                }
-                localStorage.setItem("user", JSON.stringify(res["user"]));
-                this.$router.push({ path: "/user/charts" });
-              });
-            } else {
-              this.submitted = false;
-              this.response = res["message"];
-            }
-          });
+        repository.post("login/", this.userAuthentication).then((res) => {
+          if (res["status"] == 200) {
+            repository.get("scans/").then((resp) => {
+              if (resp["scans"]) {
+                localStorage.setItem("scan_id", resp["scans"][0].scan_id);
+                this.$store.dispatch("set_scanid", resp["scans"][0].scan_id);
+              }
+
+              localStorage.setItem("user", JSON.stringify(res["user"]));
+              this.$router.push({ path: "/user/charts" });
+            });
+          } else {
+            this.submitted = false;
+            this.response = res["message"];
+          }
+        });
       }
     },
   },

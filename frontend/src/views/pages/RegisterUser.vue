@@ -53,6 +53,7 @@
               <v-col cols="12" lg="6" md="6">
                 <v-card-actions>
                   <v-btn
+                    :disabled="submitted"
                     class="float-sm-end white--text"
                     color="#127c62"
                     @click="register()"
@@ -78,12 +79,14 @@ export default {
         lastName: null,
         email: null,
         password: null,
+        submitted: false,
       },
     };
   },
   methods: {
     register() {
-      if (tthis.$refs.userData.validate()) {
+      if (this.$refs.userData.validate()) {
+        this.submitted = true;
         repository.post("register/", this.userData).then((res) => {
           if (res["status"] == 200) {
             this.userData = {};
@@ -91,6 +94,7 @@ export default {
           } else {
             console.log(res["message"]);
           }
+          this.submitted = false;
         });
         this.$refs.userData.resetValidation();
       }

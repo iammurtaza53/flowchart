@@ -10,6 +10,12 @@ class FlowsSerializer(ModelSerializer):
         fields = "__all__"
 
 
+class PathsSerializer(ModelSerializer):
+    class Meta:
+        model = PathsTbl
+        fields = "__all__"
+
+
 class FinalHostsSerializer(ModelSerializer):
     class Meta:
         model = FinalHostsTbl
@@ -33,6 +39,7 @@ class FindingtblSerailizer(ModelSerializer):
         model = FindingsTbl
         fields = '__all__'
 
+
 class RiskSerializer(ModelSerializer):
     class Meta:
         model = FindingsTbl
@@ -50,6 +57,7 @@ class Issue1Serializer(ModelSerializer):
         model = issue1Tbl
         fields = '__all__'
 
+
 class Issue2Serializer(ModelSerializer):
     class Meta:
         model = issue2Tbl
@@ -61,7 +69,14 @@ class Issue7Serializer(ModelSerializer):
         model = issue7Tbl
         fields = '__all__'
 
-class ProgressTblSerializer(ModelSerializer):   
+
+class ProgressTblSerializer(ModelSerializer):
     class Meta:
         model = ProgressTbl
+        fields = '__all__'
+
+
+class GreyboxSerializer(ModelSerializer):
+    class Meta:
+        model = GreyBoxTbl
         fields = '__all__'

@@ -22,7 +22,7 @@
           :search="search"
           class="border"
           :loading="loading"
-          loading-text="FETCHING USERS"
+          loading-text="FETCHING DATA"
         >
           <template v-slot:body="{ items }" v-if="click_row">
             <tbody>

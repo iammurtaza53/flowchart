@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <BaseCard heading="USER MANAGEMENT">
-      <UserTable
+      <DataTable
         :data="users"
         :tableHeaders="headers"
         :loading="loading"
-      ></UserTable>
+      ></DataTable>
     </BaseCard>
   </v-container>
 </template>
@@ -14,7 +14,7 @@
 import repository from "../../store/repository";
 export default {
   components: {
-    UserTable: () => import("@/views/UserManagementComponents/Userstable.vue"),
+    DataTable: () => import("@/views/pages/DataTable.vue"),
   },
   data: () => ({
     users: [],

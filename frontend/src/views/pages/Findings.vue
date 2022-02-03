@@ -1,12 +1,16 @@
 <template>
   <v-container>
     <BaseCard heading="FINDINGS">
-      <UserTable
+      <div class="my-2">
+        <v-btn color="warning" @click="exportReport()">Export Report</v-btn>
+      </div>
+
+      <FindingsTable
         :data="tableData"
         :tableHeaders="tableHeaders"
         :loading="loading"
         :click_row="true"
-      ></UserTable>
+      ></FindingsTable>
     </BaseCard>
   </v-container>
 </template>
@@ -16,7 +20,7 @@ import repository from "../../store/repository";
 
 export default {
   components: {
-    UserTable: () => import("@/views/UserManagementComponents/Userstable.vue"),
+    FindingsTable: () => import("@/views/pages/FindingsTable.vue"),
   },
   data: () => ({
     tableData: [],
@@ -33,9 +37,15 @@ export default {
   methods: {
     get_findings_table() {
       this.loading = true;
-      repository.get("findings/").then((res) => {
+      let scan_id = localStorage.getItem("scan_id");
+      repository.get("findings/?scan_id=" + scan_id).then((res) => {
         this.tableData = res["findings_data"];
         this.loading = false;
+      });
+    },
+    exportReport() {
+      repository.get("export-report/").then((res) => {
+        console.log(res);
       });
     },
   },

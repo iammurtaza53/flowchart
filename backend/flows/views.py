@@ -5,8 +5,7 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from rest_framework.exceptions import APIException
-from django.views.generic import TemplateView
-from django.shortcuts import render
+from django.http import HttpResponse
 import csv
 
 # Create your views here.
@@ -14,8 +13,9 @@ import csv
 
 class FlowChart(APIView):
     def get(self, request):
-        queryset = flows_1.objects.all()
-        serializer = FlowsSerializer(queryset, many=True)
+        scan_id = request.GET.get('scan_id')
+        queryset = PathsTbl.objects.filter(scan_id=scan_id)
+        serializer = PathsSerializer(queryset, many=True)
         return Response({'status': 200, 'data': serializer.data})
 
     def post(self, request):
@@ -80,7 +80,7 @@ class LoginUser(APIView):
                 {'status': 500, 'message': "User does not exists or Invalid Credentials "})
 
 
-class GetFinalHostOSData(APIView):
+class GetFinalHosts(APIView):
     def get(self, request):
         scan_id = request.GET.get('scan_id')
         data = FinalHostsTbl.objects.filter(scan_id=scan_id).values()
@@ -129,7 +129,8 @@ class Scan(APIView):
 
 class Findings(APIView):
     def get(self, request):
-        data = FindingsTbl.objects.all().values()
+        scan_id = request.GET.get('scan_id')
+        data = FindingsTbl.objects.filter(scan_id=scan_id)
         serialize = FindingtblSerailizer(data, many=True)
         return Response({'status': 200, 'findings_data': serialize.data})
 
@@ -163,53 +164,26 @@ class CriticalAsset(APIView):
 
 class Download(APIView):
     def get(self, request):
-        # row, column = 0, 0
-        finalhosts = FinalHostsTbl.objects.all().values()
+        scan_id = request.GET.get('scan_id')
+        finalhosts = FinalHostsTbl.objects.filter(scan_id=scan_id)
         serialize = FinalHostsSerializer(finalhosts, many=True)
-        columnNames = ['scan_id', 'host', "hostname", 'os',
-                       'subnet', 'compromised', 'timpestamp']
+        columnNames = ['scan_id', 'host', "hostname",
+                       'os', 'subnet', 'compromised', 'timpestamp']
         with open('FinalHost.csv', 'w', encoding='UTF8', newline='') as f:
             writer = csv.DictWriter(
                 f, fieldnames=columnNames, extrasaction='ignore')
             writer.writeheader()
             writer.writerows(serialize.data)
-            # for data in row:
-            # writer.writerows(data)
-            # workbook = xlsxwriter.Workbook('FinalHosts.xlsx')
-            # worksheet = workbook.add_worksheet()
-            # # Add a bold format to use to highlight cells.
-            # bold = workbook.add_format({'bold': True})
-            # # adding column names in worksheet
-            # columnNames = ['Scan Id', 'Host', "Host Name", 'OS',
-            #                'Subnet', 'Compromised', 'TimeStamp']
-            # # adding column names in worksheet
-            # # setting starting column and row
-            # column, row = 1, 1
-            # for header in columnNames:
-            #     worksheet.write(row, column, header, bold)
-            #     column += 1
-            # # adding column names in worksheet
+        f.close()
 
-            # # adding data in worksheet
-            # # setting starting row
-            # row = 2
-            # for excelData in serialize.data:
-            #     # setting starting column for each row
-            #     column = 1
-            #     for field in excelData:
-            #         if field != "id":
-            #             worksheet.write(row, column, excelData[field])
-            #             column += 1
-            #     row += 1
-            # # adding data in worksheet
-
-            # # Setting column width (formatting)
-            # worksheet.set_column('D:E', 30)
-            # for column in ('C', 'F', 'G', 'H'):
-            #     worksheet.set_column(f'{column}:{column}', 15)
-
-            # workbook.close()
-        return Response({'status': 200})
+        report_file = open('FinalHost.csv', "rb")
+        filename = "FinalHost.csv"
+        response = HttpResponse(
+            report_file,
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        response['Content-Disposition'] = 'attachment; filename=%s' % filename
+        return response
 
 
 class GetIssuesByName(APIView):
@@ -249,8 +223,15 @@ class Spray(APIView):
 class Greybox(APIView):
     def post(self, request):
         data = request.data
-        print(data)
+        serialize = GreyboxSerializer(data=data)
+        if serialize.is_valid():
+            serialize.save()
         return Response({'status': 200, 'data': data})
+
+    def get(self, request):
+        queryset = GreyBoxTbl.objects.last()
+        serialize = GreyboxSerializer(queryset)
+        return Response({'status': 200, 'data': serialize.data})
 
 
 class Progress(APIView):
@@ -259,8 +240,8 @@ class Progress(APIView):
         serialize = ProgressTblSerializer(queryset, many=True)
         return Response({'status': 200, 'data': serialize.data})
 
-class Renderer():
-    def empinfo(request):
-        # emp_list=Employee.objects.all()
-        # my_dict={'emp_list':emp_list}
-        return render(request,'../templates/flows/index.html')
+
+class ExportReport(APIView):
+    def get(self, request):
+        print("running export report function")
+        return Response({'status': 200, 'message': "running export report function"})

@@ -11,7 +11,7 @@ import repository from "../../store/repository";
 
 export default {
   components: {
-    Issues: () => import("@/views/UserManagementComponents/Issues.vue"),
+    Issues: () => import("@/views/pages/Issues.vue"),
   },
   data: () => ({
     tableData: [],
@@ -24,8 +24,11 @@ export default {
       if (issue) {
         this.loading = true;
         this.issue = issue;
+        let scan_id = localStorage.getItem("scan_id");
         repository
-          .get("get-issues-by-name/?scan_id=0&issue_name=" + issue)
+          .get(
+            "get-issues-by-name/?scan_id=" + scan_id + "&issue_name=" + issue
+          )
           .then((res) => {
             this.tableData = res["issues"];
             this.loading = false;
