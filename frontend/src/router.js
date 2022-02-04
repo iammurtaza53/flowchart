@@ -22,6 +22,7 @@ const router = new Router({
   // This is for the scroll top when click on any router link
   routes: [
     {
+      name: "Login",
       path: "/",
       component: () => import('@/views/pages/Login')
     },
@@ -150,15 +151,25 @@ const router = new Router({
 
 import NProgress from "nprogress";
 
+// router.beforeResolve((to, from, next) => {
+//   // If this isn't an initial page load.
+//   if (to.name) {
+//     // Start the route progress bar.
+//     NProgress.start(800);
+//   }
+//   next();
+// });
 router.beforeResolve((to, from, next) => {
-  // If this isn't an initial page load.
-  if (to.name) {
+  var login = JSON.parse(localStorage.getItem('user'))
+  if (!login && to.path != '/') {
     // Start the route progress bar.
-    NProgress.start(800);
+    // NProgress.start(800);
+    return next('/')
   }
-  next();
-});
-
+  else {
+    return next();
+  }
+})
 router.afterEach(() => {
   // Complete the animation of the route progress bar.
   NProgress.done();

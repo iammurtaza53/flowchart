@@ -23,8 +23,8 @@
                 ></v-text-field>
                 <v-text-field
                   v-model="userAuthentication.password"
-                  :rules="passwordRules"
                   label="Password"
+                  :rules="passwordRules"
                   outlined
                   :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="showPassword ? 'text' : 'password'"
@@ -56,7 +56,7 @@ export default {
   data: () => ({
     userAuthentication: {
       email: "test@gmail.com",
-      password: "12345678",
+      password: "123456789",
     },
     showPassword: false,
     valid: true,
@@ -88,7 +88,7 @@ export default {
               }
 
               localStorage.setItem("user", JSON.stringify(res["user"]));
-              this.$router.push({ path: "/user/charts" });
+              this.$router.push({ path: "/user/charts" }).catch(() => {});
             });
           } else {
             this.submitted = false;

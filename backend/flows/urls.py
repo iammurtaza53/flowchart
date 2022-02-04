@@ -27,5 +27,6 @@ urlpatterns = [
             name="Download"),
     re_path(r'^flowchart/$', FlowChart.as_view(),
             name="FlowChart"),
+    re_path(r'^reset-password/$', ResetPassword.as_view(), name="ResetPassword"),
 
 ]

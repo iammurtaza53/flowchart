@@ -245,3 +245,12 @@ class ExportReport(APIView):
     def get(self, request):
         print("running export report function")
         return Response({'status': 200, 'message': "running export report function"})
+
+
+class ResetPassword(APIView):
+    def patch(self, request):
+        data = request.data
+        user = User.objects.get(username=data['username'])
+        user.set_password(data['password'])
+        user.save()
+        return Response({'status': 200, 'message': 'The password has been updated. '})
