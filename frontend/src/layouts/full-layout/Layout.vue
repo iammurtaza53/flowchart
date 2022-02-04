@@ -14,19 +14,6 @@
         >
           <router-view></router-view>
         </transition>
-        <!-- customizer button -->
-        <!-- <v-btn
-          bottom
-          color="success"
-          dark
-          fab
-          fixed
-          right
-          @click.stop="setCustomizerDrawer(!Customizer_drawer)"
-        >
-          <v-icon>mdi-cog</v-icon>
-        </v-btn> -->
-        <!-- cutomizer button -->
       </v-container>
     </v-main>
     <VerticalSidebar

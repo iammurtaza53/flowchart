@@ -150,15 +150,6 @@ const router = new Router({
 });
 
 import NProgress from "nprogress";
-
-// router.beforeResolve((to, from, next) => {
-//   // If this isn't an initial page load.
-//   if (to.name) {
-//     // Start the route progress bar.
-//     NProgress.start(800);
-//   }
-//   next();
-// });
 router.beforeResolve((to, from, next) => {
   var login = JSON.parse(localStorage.getItem('user'))
   if (!login && to.path != '/') {
@@ -166,9 +157,14 @@ router.beforeResolve((to, from, next) => {
     // NProgress.start(800);
     return next('/')
   }
+  if (login && to.path == '/') {
+    NProgress.start(800);
+    return next('/user/charts')
+  }
   else {
     return next();
   }
+
 })
 router.afterEach(() => {
   // Complete the animation of the route progress bar.

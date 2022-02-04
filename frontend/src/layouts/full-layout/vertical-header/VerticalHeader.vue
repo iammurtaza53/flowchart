@@ -30,28 +30,24 @@
     <!---right part -->
 
     <!---User -->
-    <!-- <v-row justify="end">
-      <v-col cols="6" class="text-right"> -->
     <v-btn icon @click="resetPasswordDialog = true" class="mr-15">
       Reset Password
     </v-btn>
-    <!-- </v-col> -->
-    <!-- <v-col cols="6" class="text-right"> -->
     <v-btn icon @click="logout()" class="mr-4"> Logout </v-btn>
-    <!-- </v-col>
-    </v-row> -->
+
     <!---User -->
 
     <v-dialog
       outlined
       v-model="resetPasswordDialog"
-      width="50vh"
+      width="70vh"
       heigth="33vh"
       :hide-overlay="false"
+      overlay-opacity="0.7"
     >
       <v-card
         min-width="45vh"
-        width="48vh"
+        width="68vh"
         min-height="40vh"
         height="34vh"
         flat
@@ -85,10 +81,11 @@
         </v-row>
       </v-card>
     </v-dialog>
-
+    <!-- for showing response message -->
     <v-snackbar v-model="responseMessage" :timeout="timeout">
       The password has been updated
     </v-snackbar>
+    <!-- for showing response message -->
   </v-app-bar>
 </template>
 <script>
@@ -137,7 +134,6 @@ export default {
       this.$router.push("/");
     },
     resetPassword() {
-      // var url = `reset-password/`;
       this.resetPasswordDialog = false;
       var data = {
         username: this.userDetails.username,
