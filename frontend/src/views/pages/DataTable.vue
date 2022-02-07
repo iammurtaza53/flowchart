@@ -24,6 +24,7 @@
           :loading="loading"
           loading-text="FETCHING USERS"
         >
+          <v-slot name:userManagement></v-slot>
         </v-data-table>
       </v-card>
     </div>

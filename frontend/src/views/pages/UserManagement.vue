@@ -1,11 +1,8 @@
 <template>
   <v-container>
     <BaseCard heading="USER MANAGEMENT">
-      <DataTable
-        :data="users"
-        :tableHeaders="headers"
-        :loading="loading"
-      ></DataTable>
+      <DataTable :data="users" :tableHeaders="headers" :loading="loading">
+      </DataTable>
     </BaseCard>
   </v-container>
 </template>
@@ -14,7 +11,7 @@
 import repository from "../../store/repository";
 export default {
   components: {
-    DataTable: () => import("@/views/pages/DataTable.vue"),
+    DataTable: () => import("@/views/pages/UserManagementTable.vue"),
   },
   data: () => ({
     users: [],
@@ -22,17 +19,22 @@ export default {
       { text: "FIRST NAME", value: "first_name" },
       { text: "LAST NAME", value: "last_name" },
       { text: "EMAIL", value: "email" },
+      { text: "ACTION", value: "" },
     ],
     loading: true,
   }),
   computed: {},
   methods: {
+    
     get_all_users() {
       repository.get("users/").then((res) => {
         this.users = res.data;
         this.loading = false;
       });
     },
+
+
+
   },
 
   created() {

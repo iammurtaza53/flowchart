@@ -254,3 +254,21 @@ class ResetPassword(APIView):
         user.set_password(data['password'])
         user.save()
         return Response({'status': 200, 'message': 'The password has been updated. '})
+
+
+class DeleteUsers(APIView):
+    def delete(self, request):
+        username = request.GET.get('username', "")
+        User.objects.filter(username=username).delete()
+        return Response({'status': 200})
+
+
+class UserExistance(APIView):
+    def get(self, request):
+        username = request.GET.get("username", "")
+        print(username)
+        valid_user = User.objects.filter(username=username)
+        if valid_user:
+            return Response({'status': 200})
+        else:
+            return Response({'status': 500})

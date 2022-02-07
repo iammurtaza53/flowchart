@@ -28,5 +28,8 @@ urlpatterns = [
     re_path(r'^flowchart/$', FlowChart.as_view(),
             name="FlowChart"),
     re_path(r'^reset-password/$', ResetPassword.as_view(), name="ResetPassword"),
+    re_path(r'^delete-user/$', DeleteUsers.as_view(), name="DeleteUsers"),
+    re_path(r'^check-user/$', UserExistance.as_view(), name="UserExistance"),
+
 
 ]
