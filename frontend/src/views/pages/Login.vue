@@ -15,7 +15,7 @@
 
               <v-form ref="form" v-model="valid" lazy-validation>
                 <v-text-field
-                  v-model="userAuthentication.email"
+                  v-model="userAuthentication.username"
                   :rules="emailRules"
                   label="E-mail"
                   class="mt-4"
@@ -50,13 +50,14 @@
 
 <script>
 import repository from "../../store/repository";
+import axios from "axios";
 export default {
   name: "BoxedLogin",
 
   data: () => ({
     userAuthentication: {
-      email: "test@gmail.com",
-      password: "123456789",
+      username: "user@gmail.com",
+      password: "12345678",
     },
     showPassword: false,
     valid: true,
@@ -79,22 +80,45 @@ export default {
       this.response = null;
       if (this.$refs.form.validate(true)) {
         this.submitted = true;
-        repository.post("login/", this.userAuthentication).then((res) => {
-          if (res["status"] == 200) {
-            repository.get("scans/").then((resp) => {
-              if (resp["scans"]) {
-                localStorage.setItem("scan_id", resp["scans"][0].scan_id);
-                this.$store.dispatch("set_scanid", resp["scans"][0].scan_id);
-              }
+        axios
+          .post(
+            "http://localhost:8000/user/api-token-auth/",
+            this.userAuthentication
+          )
+          .then((res) => {
+            if (res["data"]["token"]) {
+              let access_token = res["data"]["token"];
+              localStorage.setItem(
+                "user_access_token",
+                JSON.stringify(access_token)
+              );
+              repository.get("scans/").then((resp) => {
+                if (resp["scans"]) {
+                  localStorage.setItem("scan_id", resp["scans"][0].scan_id);
+                  this.$store.dispatch("set_scanid", resp["scans"][0].scan_id);
+                }
 
-              localStorage.setItem("user", JSON.stringify(res["user"]));
-              this.$router.push({ path: "/user/charts" }).catch(() => {});
-            });
-          } else {
-            this.submitted = false;
-            this.response = res["message"];
-          }
-        });
+                // let access_token = res["data"]["token"];
+                // localStorage.setItem(
+                //   "user_access_token",
+                //   JSON.stringify(access_token)
+                console.log("redirecting");
+                this.$router.push({ path: "/user/charts" }).catch(() => {});
+              });
+              localStorage.setItem(
+                "user",
+                JSON.stringify(this.userAuthentication)
+              );
+              // console.log("redirecting");
+              // this.$router.push({ path: "/user/charts" }).catch(() => {});
+            }
+            // });
+            // }
+            else {
+              this.submitted = false;
+              this.response = res["message"];
+            }
+          });
       }
     },
   },

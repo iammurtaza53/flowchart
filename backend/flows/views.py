@@ -7,11 +7,15 @@ from django.contrib.auth import authenticate, login
 from rest_framework.exceptions import APIException
 from django.http import HttpResponse
 import csv
+from flows.permissions import *
+from rest_framework.permissions import *
 
 # Create your views here.
 
 
 class FlowChart(APIView):
+    permission_classes = [HasToken]
+
     def get(self, request):
         scan_id = request.GET.get('scan_id')
         queryset = PathsTbl.objects.filter(scan_id=scan_id)
@@ -51,6 +55,8 @@ class FlowChart(APIView):
 
 
 class RegisterUser(APIView):
+    permission_classes = [HasToken]
+
     def post(self, request):
 
         data = request.data
@@ -68,7 +74,10 @@ class RegisterUser(APIView):
 
 
 class LoginUser(APIView):
+    permission_classes = [HasToken]
+
     def post(self, request):
+        breakpoint()
         data = request.data
         user = authenticate(username=data['email'], password=data['password'])
         if user is not None:
@@ -81,6 +90,8 @@ class LoginUser(APIView):
 
 
 class GetFinalHosts(APIView):
+    permission_classes = [HasToken]
+
     def get(self, request):
         scan_id = request.GET.get('scan_id')
         data = FinalHostsTbl.objects.filter(scan_id=scan_id).values()
@@ -92,6 +103,8 @@ class GetFinalHosts(APIView):
 
 
 class GetRiskSeverityData(APIView):
+    permission_classes = [HasToken]
+
     def get(self, request):
         scan_id = request.GET.get('scan_id')
         data = FindingsTbl.objects.filter(scan_id=scan_id).values('risk')
@@ -103,6 +116,8 @@ class GetRiskSeverityData(APIView):
 
 
 class Scans(APIView):
+    permission_classes = [HasToken]
+
     def get(self, request):
         scanIds = ScanIdTbl.objects.all().order_by('scan_id')
         scanIds = ScanIdTblSerializer(scanIds, many=True)
@@ -111,6 +126,8 @@ class Scans(APIView):
 
 
 class Users(APIView):
+    permission_classes = [HasToken]
+
     def get(self, request):
         allUsers = User.objects.all()
         serialize = UserSerializer(allUsers, many=True)
@@ -118,6 +135,8 @@ class Users(APIView):
 
 
 class Scan(APIView):
+    permission_classes = [HasToken]
+
     def post(self, request):
         data = request.data
         print(data)
@@ -128,6 +147,8 @@ class Scan(APIView):
 
 
 class Findings(APIView):
+    permission_classes = [HasToken]
+
     def get(self, request):
         scan_id = request.GET.get('scan_id')
         data = FindingsTbl.objects.filter(scan_id=scan_id)
@@ -136,6 +157,8 @@ class Findings(APIView):
 
 
 class PostUseCaseData(APIView):
+    permission_classes = [HasToken]
+
     def post(self, request):
         data = request.data
         print(data)
@@ -143,6 +166,8 @@ class PostUseCaseData(APIView):
 
 
 class CriticalAsset(APIView):
+    permission_classes = [HasToken]
+
     def post(self, request):
         ipSet = request.data
         serialize = CriticalAssetsSerializer(data=ipSet, many=True)
@@ -163,6 +188,8 @@ class CriticalAsset(APIView):
 
 
 class Download(APIView):
+    permission_classes = [HasToken]
+
     def get(self, request):
         scan_id = request.GET.get('scan_id')
         finalhosts = FinalHostsTbl.objects.filter(scan_id=scan_id)
@@ -187,6 +214,8 @@ class Download(APIView):
 
 
 class GetIssuesByName(APIView):
+    permission_classes = [HasToken]
+
     def get(self, request):
         scan_id = request.GET.get("scan_id",)
         issue_name = request.GET.get("issue_name",)
@@ -207,6 +236,8 @@ class GetIssuesByName(APIView):
 
 
 class Administration(APIView):
+    permission_classes = [HasToken]
+
     def post(self, request):
         data = request.data
         print(data)
@@ -214,6 +245,8 @@ class Administration(APIView):
 
 
 class Spray(APIView):
+    permission_classes = [HasToken]
+
     def post(self, request):
         data = request.data
         print(data)
@@ -221,6 +254,8 @@ class Spray(APIView):
 
 
 class Greybox(APIView):
+    permission_classes = [HasToken]
+
     def post(self, request):
         data = request.data
         serialize = GreyboxSerializer(data=data)
@@ -229,12 +264,15 @@ class Greybox(APIView):
         return Response({'status': 200, 'data': data})
 
     def get(self, request):
+        # permission_classes = [HasToken]
         queryset = GreyBoxTbl.objects.last()
         serialize = GreyboxSerializer(queryset)
         return Response({'status': 200, 'data': serialize.data})
 
 
 class Progress(APIView):
+    permission_classes = [HasToken]
+
     def get(self, requst):
         queryset = ProgressTbl.objects.filter(id=1)
         serialize = ProgressTblSerializer(queryset, many=True)
@@ -242,12 +280,16 @@ class Progress(APIView):
 
 
 class ExportReport(APIView):
+    permission_classes = [HasToken]
+
     def get(self, request):
         print("running export report function")
         return Response({'status': 200, 'message': "running export report function"})
 
 
 class ResetPassword(APIView):
+    permission_classes = [HasToken]
+
     def patch(self, request):
         data = request.data
         user = User.objects.get(username=data['username'])
@@ -257,6 +299,8 @@ class ResetPassword(APIView):
 
 
 class DeleteUsers(APIView):
+    permission_classes = [HasToken]
+
     def delete(self, request):
         username = request.GET.get('username', "")
         User.objects.filter(username=username).delete()
@@ -264,6 +308,8 @@ class DeleteUsers(APIView):
 
 
 class UserExistance(APIView):
+    permission_classes = [HasToken]
+
     def get(self, request):
         username = request.GET.get("username", "")
         print(username)

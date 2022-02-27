@@ -20,7 +20,7 @@ export default {
   }),
   methods: {
     check_user() {
-      this.loggedUser = JSON.parse(localStorage.getItem("user"));
+      this.loggedUser = JSON.parse(localStorage.getItem("userAuthenticate"));
       if (this.loggedUser) {
         repository
           .get(`check-user/?username=${this.loggedUser["username"]}`)

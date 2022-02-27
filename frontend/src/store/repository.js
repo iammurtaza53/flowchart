@@ -12,9 +12,25 @@ if (process.env.NODE_ENV == "production") {
 }
 
 const instance = axios.create({
+    xsrfHeaderName: "X-CSRFToken",
+    xsrfCookieName: "csrftoken",
     baseURL: baseDomain,
 });
 
+instance.interceptors.request.use(
+    (config) => {
+        let access_token = JSON.parse(localStorage.getItem("user_access_token"));
+        console.log(access_token)
+        if (access_token != undefined) {
+            config.headers.Authorization = "Bearer " + access_token;
+        }
+
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
 
 export default {
 
