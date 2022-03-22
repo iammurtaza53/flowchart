@@ -30,6 +30,11 @@ urlpatterns = [
     re_path(r'^reset-password/$', ResetPassword.as_view(), name="ResetPassword"),
     re_path(r'^delete-user/$', DeleteUsers.as_view(), name="DeleteUsers"),
     re_path(r'^check-user/$', UserExistance.as_view(), name="UserExistance"),
-
+    re_path(r'^test/$', Test.as_view(), name="Test"),
+    re_path(r'^save-nodes/$', SaveNodes.as_view(), name="SaveNodes"),
+    re_path(r'^save-links/$', SaveLinks.as_view(), name="SaveLinks"),
+    re_path(r'^get-nodes/$', GetNodes.as_view(), name="GetNodes"),
+    re_path(r'^post-files/$', GetImages.as_view(), name="GetImages"),
+    #     re_path(r'^get-nodes/$',GetNodes.as_view(),name="GetNodes"),
 
 ]

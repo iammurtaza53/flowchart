@@ -522,3 +522,15 @@ class GreyBoxTbl(models.Model):
 
     class Meta:
         db_table = 'greybox_tbl'
+
+class Nodes(models.Model):
+    id = models.AutoField(primary_key=True)
+    node_name = models.CharField(max_length=150)
+    relationship = models.CharField(max_length=150)
+
+    class Meta:
+        db_table = 'nodes'
+
+class Links(models.Model):
+    links = models.JSONField()
+

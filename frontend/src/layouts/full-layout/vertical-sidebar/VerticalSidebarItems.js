@@ -61,6 +61,11 @@ export default [
     to: "/user/greybox",
   },
   {
+    title: "Activation",
+    icon: "mdi-access-point-network",
+    to: "/user/activate",
+  },
+  {
     group: '/user',
     model: false,
     icon: "mdi-account-cog",

@@ -1,3 +1,4 @@
+import json
 from flows.models import *
 from .serializers import *
 from rest_framework.decorators import APIView
@@ -14,7 +15,7 @@ from rest_framework.permissions import *
 
 
 class FlowChart(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def get(self, request):
         scan_id = request.GET.get('scan_id')
@@ -55,7 +56,7 @@ class FlowChart(APIView):
 
 
 class RegisterUser(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def post(self, request):
 
@@ -74,7 +75,7 @@ class RegisterUser(APIView):
 
 
 class LoginUser(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def post(self, request):
         breakpoint()
@@ -90,7 +91,7 @@ class LoginUser(APIView):
 
 
 class GetFinalHosts(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def get(self, request):
         scan_id = request.GET.get('scan_id')
@@ -103,7 +104,7 @@ class GetFinalHosts(APIView):
 
 
 class GetRiskSeverityData(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def get(self, request):
         scan_id = request.GET.get('scan_id')
@@ -116,7 +117,7 @@ class GetRiskSeverityData(APIView):
 
 
 class Scans(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def get(self, request):
         scanIds = ScanIdTbl.objects.all().order_by('scan_id')
@@ -126,7 +127,7 @@ class Scans(APIView):
 
 
 class Users(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def get(self, request):
         allUsers = User.objects.all()
@@ -135,7 +136,7 @@ class Users(APIView):
 
 
 class Scan(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def post(self, request):
         data = request.data
@@ -147,7 +148,7 @@ class Scan(APIView):
 
 
 class Findings(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def get(self, request):
         scan_id = request.GET.get('scan_id')
@@ -157,7 +158,7 @@ class Findings(APIView):
 
 
 class PostUseCaseData(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def post(self, request):
         data = request.data
@@ -166,7 +167,7 @@ class PostUseCaseData(APIView):
 
 
 class CriticalAsset(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def post(self, request):
         ipSet = request.data
@@ -188,7 +189,7 @@ class CriticalAsset(APIView):
 
 
 class Download(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def get(self, request):
         scan_id = request.GET.get('scan_id')
@@ -214,7 +215,7 @@ class Download(APIView):
 
 
 class GetIssuesByName(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def get(self, request):
         scan_id = request.GET.get("scan_id",)
@@ -236,7 +237,7 @@ class GetIssuesByName(APIView):
 
 
 class Administration(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def post(self, request):
         data = request.data
@@ -245,7 +246,7 @@ class Administration(APIView):
 
 
 class Spray(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def post(self, request):
         data = request.data
@@ -254,7 +255,7 @@ class Spray(APIView):
 
 
 class Greybox(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def post(self, request):
         data = request.data
@@ -264,14 +265,14 @@ class Greybox(APIView):
         return Response({'status': 200, 'data': data})
 
     def get(self, request):
-        # permission_classes = [HasToken]
+        # #permission_classes = [HasToken]
         queryset = GreyBoxTbl.objects.last()
         serialize = GreyboxSerializer(queryset)
         return Response({'status': 200, 'data': serialize.data})
 
 
 class Progress(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def get(self, requst):
         queryset = ProgressTbl.objects.filter(id=1)
@@ -280,7 +281,7 @@ class Progress(APIView):
 
 
 class ExportReport(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def get(self, request):
         print("running export report function")
@@ -288,7 +289,7 @@ class ExportReport(APIView):
 
 
 class ResetPassword(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def patch(self, request):
         data = request.data
@@ -299,7 +300,7 @@ class ResetPassword(APIView):
 
 
 class DeleteUsers(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def delete(self, request):
         username = request.GET.get('username', "")
@@ -308,7 +309,7 @@ class DeleteUsers(APIView):
 
 
 class UserExistance(APIView):
-    permission_classes = [HasToken]
+    #permission_classes = [HasToken]
 
     def get(self, request):
         username = request.GET.get("username", "")
@@ -318,3 +319,85 @@ class UserExistance(APIView):
             return Response({'status': 200})
         else:
             return Response({'status': 500})
+
+
+class Test(APIView):
+    def get(self, request):
+        nodeName = request.GET.get('node_name',)
+        relationship = request.GET.get('relationship',)
+        print(f'Node name: {nodeName} Relationship: {relationship}')
+        return Response({'message': 'data received'})
+
+
+class SaveNodes(APIView):
+    def post(self, request):
+        # data = {}
+        # for id in range(7):
+        nodes = [
+            {'node_name': "Node 1", 'relationship': "test"},
+            {'node_name': "Node 2", 'relationship': "test"},
+            {'node_name': "Node 3", 'relationship': "test"},
+            {'node_name': "Node 4", 'relationship': "test"},
+            {'node_name': "Node 5", 'relationship': "test"},
+            {'node_name': "Node 6", 'relationship': "test"},
+            {'node_name': "Node 7", 'relationship': "test"},
+        ]
+        serializer = NodeSerializer(data=nodes, many=True)
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            print(serializer.errors)
+        return Response({'message': 'data has been inserted'})
+
+
+class SaveLinks(APIView):
+    def post(self, request):
+        links = [
+            {
+                'links': {'id': 1, 'to': 2},
+            },
+            {
+                'links': {'from': [1, 3], 'id': 2, 'to': 4},
+            },
+            {
+                'links': {'id': 3, 'to': 2},
+            },
+            {
+                'links': {'from': 2, 'id': 4},
+            },
+            {
+                'links': {'from': 7, 'id': 5, 'to': 6},
+            },
+            {
+                'links': {'from': 7, 'id': 6, 'to': 4},
+            },
+            {
+                'links': {'id': 7, 'to': 4},
+            },
+        ]
+
+        serializer = LinksSerializer(data=links, many=True)
+        if serializer.is_valid():
+            serializer.save()
+        else:
+            print(serializer.errors)
+        return Response({'message': 'data has been send'})
+
+
+class GetNodes(APIView):
+    def get(self, request):
+
+        nodes = Nodes.objects.all()
+        links = Links.objects.all().values('links')
+        linkList = []
+        nodeSerializer = NodeSerializer(nodes, many=True)
+        for link in links:
+            linkList.append(link['links'])
+        return Response({'node_data': nodeSerializer.data, 'link_data': linkList})
+
+
+class GetImages(APIView):
+    def post(self, request):
+        file = request.data
+        print(file)
+        return Response({'message': 'file has been received at the backend'})

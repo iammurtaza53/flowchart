@@ -80,3 +80,13 @@ class GreyboxSerializer(ModelSerializer):
     class Meta:
         model = GreyBoxTbl
         fields = '__all__'
+
+class NodeSerializer(ModelSerializer):
+    class Meta:
+        model = Nodes
+        fields = '__all__'
+
+class LinksSerializer(ModelSerializer):
+    class Meta:
+        model = Links
+        fields = '__all__'

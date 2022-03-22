@@ -8,6 +8,7 @@ import "./plugins/base";
 import VueSkycons from "vue-skycons";
 import VueFeather from "vue-feather";
 import InstantSearch from "vue-instantsearch";
+import 'drawflow/dist/drawflow.min.css'
 
 Vue.use(VueFeather);
 Vue.use(VueSkycons, {

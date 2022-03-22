@@ -90,9 +90,9 @@ const router = new Router({
           component: () => import("@/views/pages/ApexCharts"),
         },
         {
-          name: "Flowchart",
+          name: "Flowchart",  
           path: "/user/flowchart",
-          component: () => import("@/views/pages/Flowcharts"),
+          component: () => import("@/views/pages/Flowchart"),
         },
         {
           name: "Administration",
@@ -109,6 +109,13 @@ const router = new Router({
           path: "/user/greybox",
           component: () => import("@/views/pages/Greybox"),
         },
+        {
+          name: "Activation",
+          path: "/user/activate",
+          component: () => import("@/views/pages/ActivationPage")
+
+        },
+
       ],
     },
     {

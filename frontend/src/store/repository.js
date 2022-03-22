@@ -89,6 +89,18 @@ export default {
             });
     },
 
+    uploadMediaFiles(url, formData) {
+        return instance
+            .post(baseDomain + url, formData)
+            .then((response) => {
+                return response.data;
+            })
+            .catch((err) => {
+                console.log(err);
+                return "server_error";
+            });
+    },
+
     downloadReport(url) {
         return instance
             .get(url, {
