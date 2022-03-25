@@ -21,7 +21,7 @@
     "devexpress-gantt": "0.0.29",
     "devextreme": "^19.2.9",
     "devextreme-vue": "^19.2.9",
-    "drawflow": "0.0.55",
+    "drawflow": "^0.0.55",
     "dx-systemjs-vue-browser": "latest",
     "feather-icons": "^4.28.0",
     "instantsearch.css": "^7.4.5",

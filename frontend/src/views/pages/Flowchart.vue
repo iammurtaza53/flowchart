@@ -258,15 +258,13 @@ export default {
         //checking for parent
         if ("from" in edges[0]) {
           dataset[componentID]["inputs"]["input_1"] = {};
-          dataset[componentID]["pos_x"] = horizontalAlignment += 100;
-          dataset[componentID]["pos_y"] = pNodeVAlign += 60;
+          dataset[componentID]["pos_x"] = horizontalAlignment + 100;
+          dataset[componentID]["pos_y"] = pNodeVAlign += 10
 
           let inputData = [];
           // check for more than 1 inputs
           if (Array.isArray(edges[0]["from"])) {
-            // dataset[componentID]["pos_x"] = horizontalAlignment += 100;
-            // dataset[componentID]["pos_y"] = pNodeVAlign += 60;
-            // iterating over each input
+           
             edges[0]["from"].forEach((inputNodeID) => {
               var nodeData = {};
               nodeData["node"] = inputNodeID;
@@ -289,7 +287,7 @@ export default {
         // checking for child
         if ("to" in edges[0]) {
           dataset[componentID]["pos_x"] = pNodeHAlign + 100;
-          dataset[componentID]["pos_y"] = pNodeVAlign += 40;
+          dataset[componentID]["pos_y"] = pNodeVAlign += 110;
           dataset[componentID]["outputs"]["output_1"] = {};
           let outputData = [];
           if (Array.isArray(edges[0]["to"]))
