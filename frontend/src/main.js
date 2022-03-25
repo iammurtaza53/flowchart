@@ -9,8 +9,10 @@ import VueSkycons from "vue-skycons";
 import VueFeather from "vue-feather";
 import InstantSearch from "vue-instantsearch";
 import 'drawflow/dist/drawflow.min.css'
+import VueHtmlToPaper from "vue-html-to-paper";
 
 Vue.use(VueFeather);
+Vue.use(VueHtmlToPaper);
 Vue.use(VueSkycons, {
   color: "#1e88e5",
 });

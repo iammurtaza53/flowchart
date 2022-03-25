@@ -66,6 +66,11 @@ export default [
     to: "/user/activate",
   },
   {
+    title: "PDF",
+    icon: "mdi-access-point-network",
+    to: "/user/pdf",
+  },
+  {
     group: '/user',
     model: false,
     icon: "mdi-account-cog",

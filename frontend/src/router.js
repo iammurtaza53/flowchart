@@ -115,6 +115,12 @@ const router = new Router({
           component: () => import("@/views/pages/ActivationPage")
 
         },
+        {
+          name: "PDF",
+          path: "/user/pdf",
+          component: () => import("@/views/pages/pdf")
+
+        },
 
       ],
     },
